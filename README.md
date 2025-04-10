@@ -74,23 +74,24 @@ This portfolio not only enhanced our technical skills but also strengthened our 
 <div style="display: flex; align-items: flex-start; align: center">
 <table align="center">
   <tr> 
-    <td align="center" width="96"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Google_Colab_Logo_2020.svg/1200px-Google_Colab_Logo_2020.svg.png" width="48" height="48" alt="Colab"/><br>Colab</td>
-    <td align="center" width="96"><img src="https://upload.wikimedia.org/wikipedia/commons/4/4f/Overleaf_Logo_2020.svg" width="48" height="48" alt="Overleaf"/><br>Overleaf</td>
-    <td align="center" width="96"><img src="https://upload.wikimedia.org/wikipedia/commons/d/d9/Kaggle_logo.png" width="48" height="48" alt="Kaggle"/><br>Kaggle</td>
-    <td align="center" width="96"><img src="https://raw.githubusercontent.com/AlexeyAB/darknet/master/cfg/yolov5-logo.png" width="48" height="48" alt="YOLO"/><br>YOLO Model</td>
-    <td align="center" width="96"><img src="https://upload.wikimedia.org/wikipedia/commons/c/c3/Python-logo-notext.svg" width="48" height="48" alt="Python"/><br>Python</td>
+    <td align="center" width="96"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/Google_Colaboratory_SVG_Logo.svg/512px-Google_Colaboratory_SVG_Logo.svg.png" width="48" height="48" alt="Colab" /><br>Colab</td>
+    <td align="center" width="96"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/Overleaf_logo.svg/2560px-Overleaf_logo.svg.png" width="48" height="48" alt="Overleaf" /><br>Overleaf</td>
+    <td align="center" width="96"><img src="https://upload.wikimedia.org/wikipedia/commons/7/7c/Kaggle_logo.png" width="48" height="48" alt="Kaggle" /><br>Kaggle</td>
+    <td align="center" width="96"><img src="https://raw.githubusercontent.com/Azure/ObjectDetectionUsingYoloV3/master/media/yolo-logo.png" width="48" height="48" alt="YOLO" /><br>YOLO</td>
+    <td align="center" width="96"><img src="https://techstack-generator.vercel.app/python-icon.svg" width="65" height="65" alt="Python" /><br>Python</td>
   </tr>
   <tr>
-    <td align="center" width="96"><img src="https://numpy.org/images/logo.svg" width="48" height="48" alt="NumPy"/><br>NumPy</td>
-    <td align="center" width="96"><img src="https://pandas.pydata.org/static/img/pandas_logo.svg" width="48" height="48" alt="Pandas"/><br>Pandas</td>
-    <td align="center" width="96"><img src="https://upload.wikimedia.org/wikipedia/commons/4/46/Matplotlib_logo.svg" width="48" height="48" alt="Matplotlib"/><br>Matplotlib</td>
-    <td align="center" width="96"><img src="https://upload.wikimedia.org/wikipedia/commons/8/8c/PyTorch_logo.png" width="48" height="48" alt="PyTorch"/><br>PyTorch</td>
-    <td align="center" width="96"><img src="https://upload.wikimedia.org/wikipedia/commons/e/ec/Scikit-learn_logo.svg" width="48" height="48" alt="Scikit-learn"/><br>sklearn</td>
+    <td align="center" width="96"><img src="https://miro.medium.com/v2/resize:fit:1001/1*vPezx00A1u0WAfS8e8wBXQ.png" width="48" height="48" alt="NumPy" /><br>NumPy</td>
+    <td align="center" width="96"><img src="https://geo-python-site.readthedocs.io/en/latest/_images/pandas_logo.png" width="55" height="48" alt="Pandas" /><br>Pandas</td>
+    <td align="center" width="96"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/Matplotlib_icon.svg/2048px-Matplotlib_icon.svg.png" width="48" height="48" alt="Matplotlib" /><br>Matplotlib</td>
+    <td align="center" width="96"><img src="https://skillicons.dev/icons?i=pytorch" width="48" height="48" alt="PyTorch"/><br>PyTorch</td>
+    <td align="center" width="96"><img src="https://upload.wikimedia.org/wikipedia/commons/0/05/Scikit_learn_logo_small.svg" width="48" height="48" alt="scikit-learn" /><br>scikit-learn</td>
   </tr>
 </table>
 </div>
 
 <!-- END TABLE -->
+
 
 ---
 
