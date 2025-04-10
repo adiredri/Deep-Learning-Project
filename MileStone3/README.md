@@ -1,4 +1,5 @@
-# Milestone 3 - Fine-Grained Car Classification & Image Retrieval
+# Milestone 3 - Final Project: Fine-Grained Car Classification and Retrieval
+
 
 ## Introduction
 
