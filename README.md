@@ -75,9 +75,9 @@ This portfolio not only enhanced our technical skills but also strengthened our 
 <table align="center">
   <tr> 
     <td align="center" width="96"><img src="https://colab.research.google.com/img/colab_favicon_256px.png" width="48" height="48" alt="Colab" /><br>Colab</td>
-    <td align="center" width="96"><img src="https://upload.wikimedia.org/wikipedia/commons/3/31/Overleaf_logo.svg" width="48" height="48" alt="Overleaf" /><br>Overleaf</td>
-    <td align="center" width="96"><img src="https://upload.wikimedia.org/wikipedia/commons/7/7c/Kaggle_logo.png" width="48" height="48" alt="Kaggle" /><br>Kaggle</td>
-    <td align="center" width="96"><img src="https://raw.githubusercontent.com/Azure/ObjectDetectionUsingYoloV3/master/media/yolo-logo.png" width="48" height="48" alt="YOLO" /><br>YOLO</td>
+    <td align="center" width="96"><img src="https://cdn.overleaf.com/img/ol-brand/overleaf_og_logo.png" width="48" height="48" alt="Overleaf" /><br>Overleaf</td>
+    <td align="center" width="96"><img src="https://cdn4.iconfinder.com/data/icons/logos-and-brands/512/189_Kaggle_logo_logos-512.png" width="48" height="48" alt="Kaggle" /><br>Kaggle</td>
+    <td align="center" width="96"><img src="https://cdn.prod.website-files.com/646dd1f1a3703e451ba81ecc/64994922cf2a6385a4bf4489_UltralyticsYOLO_mark_blue.svg" width="48" height="48" alt="YOLO" /><br>YOLOv8</td>
     <td align="center" width="96"><img src="https://techstack-generator.vercel.app/python-icon.svg" width="65" height="65" alt="Python" /><br>Python</td>
   </tr>
   <tr>
@@ -91,6 +91,7 @@ This portfolio not only enhanced our technical skills but also strengthened our 
 </div>
 
 <!-- END TABLE -->
+
 
 
 
