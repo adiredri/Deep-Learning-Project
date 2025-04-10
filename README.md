@@ -1,12 +1,12 @@
-# Basics of Deep Learning – Final Project Portfolio
+# Basics of Deep Learning - Final Project Portfolio
 
-This repository presents a journey through three progressive milestones of the *"Basics of Deep Learning"* course. Each milestone explores different modeling approaches, frameworks, and levels of abstraction — from scratch implementations with NumPy to full-scale CNNs in PyTorch. The final milestone dives into a fine-grained visual classification task using the Stanford Cars dataset.
+This repository presents a journey through three progressive milestones of the *"Basics of Deep Learning"* course. Each milestone explores different modeling approaches, frameworks, and levels of abstraction - from scratch implementations with NumPy to full-scale CNNs in PyTorch. The final milestone dives into a fine-grained visual classification task using the Stanford Cars dataset.
 
 Each milestone has its own dedicated folder and `README.md` that includes full documentation, architectures, training processes, evaluation results, and conclusions.
 
 ---
 
-## Milestone 1 – NumPy Neural Network for Binary Classification
+## Milestone 1 - NumPy Neural Network for Binary Classification
 
 We began by building a feedforward neural network **entirely from scratch using NumPy** to classify between two hand gestures (digits 6 and 8) from the **Sign Language Digits Dataset**. The project involved:
 
@@ -20,7 +20,7 @@ The model reached an impressive **95.6% accuracy** and taught us foundational de
 
 ---
 
-## Milestone 2 – Multi-Class Classification in PyTorch
+## Milestone 2 - Multi-Class Classification in PyTorch
 
 In this stage, we transitioned to **PyTorch**, re-implementing the binary classifier and expanding it into a **multi-class classification model** capable of recognizing all ten digits (0–9). Highlights include:
 
@@ -34,7 +34,7 @@ The multiclass model achieved **98.93% validation accuracy** and **100% test acc
 
 ---
 
-## Milestone 3 – Fine-Grained Car Classification & Image Retrieval
+## Milestone 3 - Fine-Grained Car Classification & Image Retrieval
 
 The final milestone tackled a **fine-grained classification task** using the **Stanford Cars Dataset** with 196 car categories. We explored three configurations:
 
@@ -59,9 +59,9 @@ The final milestone tackled a **fine-grained classification task** using the **S
 
 Through these milestones, we experienced the evolution of deep learning practices:
 
-- **From scratch to frameworks**: We saw how using NumPy teaches the mechanics, while PyTorch boosts flexibility and power.
-- **From binary to multiclass and fine-grained tasks**: We advanced from simple digit recognition to subtle distinctions between car models.
-- **From classification to retrieval**: We broadened our thinking from prediction to semantic similarity.
+- **From scratch to frameworks** - We saw how using NumPy teaches the mechanics, while PyTorch boosts flexibility and power.
+- **From binary to multiclass and fine-grained tasks** - We advanced from simple digit recognition to subtle distinctions between car models.
+- **From classification to retrieval** - We broadened our thinking from prediction to semantic similarity.
 
 This portfolio not only enhanced our technical skills but also strengthened our understanding of **model selection**, **architecture design**, **performance evaluation**, and **deployment considerations**.
 
