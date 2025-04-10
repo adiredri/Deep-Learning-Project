@@ -2,7 +2,7 @@
 
 This repository presents a journey through three progressive milestones of the *"Basics of Deep Learning"* course. Each milestone explores different modeling approaches, frameworks, and levels of abstraction - from scratch implementations with NumPy to full-scale CNNs in PyTorch. The final milestone dives into a fine-grained visual classification task using the Stanford Cars dataset.
 
-Each milestone has its own dedicated folder and `README.md` that includes full documentation, architectures, training processes, evaluation results, and conclusions.
+Each milestone has its own dedicated folder and `README.md` that includes full documentation, architectures, training processes, evaluation results, and conclusion
 
 ---
 
@@ -66,3 +66,9 @@ Through these milestones, we experienced the evolution of deep learning practice
 This portfolio not only enhanced our technical skills but also strengthened our understanding of **model selection**, **architecture design**, **performance evaluation**, and **deployment considerations**.
 
 ---
+
+## Contributors
+
+- **Adir Edri**
+- **Ofir Almog** – [GitHub Profile](https://github.com/Ofigu)
+
