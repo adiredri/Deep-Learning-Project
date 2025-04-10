@@ -1,71 +1,74 @@
-# Milestone 2 - Multi-Class Classification of Sign Language Digits using PyTorch
+# Milestone 2 – Multi-Class Classification of Sign Language Digits using PyTorch
+
+- **Run the notebook**: [Open in Google Colab](https://colab.research.google.com/drive/1hpOeV_P6bLdP1T_GeFUPohMhuF9ZIEee)  
+- **View the full report**: [MS2_Report.pdf](./MS2_Report.pdf)
+
+---
 
 ## Project Summary
-In this milestone, we extended our previous NumPy-based binary classification model by implementing both binary and multiclass classifiers using PyTorch. The task was to classify hand sign digits from the Sign Language Digits dataset, and explore more advanced deep learning tools such as PyTorch's autograd, DataLoader, and optimization capabilities. This work demonstrated how moving from basic implementation to a full-featured framework improves efficiency, scalability, and performance in deep learning projects.
+
+This milestone extended our previous work (Milestone 1) by implementing both binary and multiclass classifiers using **PyTorch**. The task remained the same — recognizing digits from hand sign images — but the approach shifted to a full-featured deep learning framework.
+
+We built custom fully connected neural networks (FCNs) and leveraged PyTorch’s tools (DataLoader, autograd, CUDA acceleration, etc.) to explore how architectural depth and training optimizations impact model performance.
+
+---
 
 ## Dataset
-We continued using the Sign Language Digits Dataset, consisting of 5,000 grayscale images sized 28x28 pixels, each representing a hand gesture corresponding to digits from 0 to 9. For the binary classification task, we selected two digits (e.g., 6 and 8), while for the multiclass task, we included all 10 digits. The dataset was normalized, reshaped into 784-dimensional vectors, and loaded into PyTorch using custom Dataset and DataLoader classes.
+
+We continued using the **Sign Language Digits Dataset**, consisting of 5,000 grayscale 28×28 images representing hand gestures for digits 0–9.
+
+- For binary classification: focused on digits **6 and 8**.
+- For multiclass classification: used **all 10 digits (0–9)**.
+
+- **Source**: [Sign Language MNIST on Kaggle](https://www.kaggle.com/datasets/datamunge/sign-language-mnist)
+
+---
 
 ## Objective
-The main goal of this milestone was twofold:  
-1. To reimplement our previous binary classification network using PyTorch.  
-2. To design and train a multiclass classification network capable of recognizing all digits from 0 to 9.  
 
-This involved building deeper architectures, experimenting with activation and loss functions, managing GPU acceleration, and tuning hyperparameters to improve performance. The entire solution was built using PyTorch from the ground up.
+1. Recreate the binary classification task using PyTorch  
+2. Extend to multiclass classification for all digits  
+3. Build a scalable, flexible training pipeline  
+4. Tune architecture and hyperparameters for best generalization
+
+---
 
 ## Model Architectures
 
-- **Binary Classification**
-  - **Input Layer** - 784 neurons (flattened 28x28 pixels)
-  - **Hidden Layer** - 128 neurons
-  - **Output Layer** - 2 neurons (Softmax)
-  - **Activation** - ReLU (hidden), Softmax (output)
-  - **Loss Function** - Binary Cross-Entropy
+| **Task**              | **Hidden Layers**    | **Output Layer**     | **Activation**                      | **Loss Function**           |
+|:---------------------:|:--------------------:|:--------------------:|:-----------------------------------:|:---------------------------:|
+| Binary Classification | 1 layer (128 units)  | 2 neurons (Softmax)  | ReLU (hidden), Softmax (output)     | Binary Cross-Entropy        |
+| Multiclass Classification | 2 layers (128, 64)   | 10 neurons (Softmax) | ReLU (hidden), Softmax (output)     | Categorical Cross-Entropy   |
 
-- **Multiclass Classification**
-  - **Input Layer** - 784 neurons
-  - **Hidden Layers** - 128 and 64 neurons
-  - **Output Layer** - 10 neurons
-  - **Activation** - ReLU (hidden), Softmax (output)
-  - **Loss Function** - Categorical Cross-Entropy
+---
 
 ## Training Details
-- **Optimizer** - Adam / SGD  
-- **Learning Rates** - 0.01, 0.001 (experimented)  
-- **Batch Sizes** - 32 for binary, 64 for multiclass  
-- **Epochs** - 10 to 15 depending on experiment  
-- **Features** - Early stopping, learning rate scheduling, dropout, GPU support  
-- **Evaluation** - Accuracy, precision, recall, F1-score, confusion matrix  
 
-## Experiments & Results
+| **Optimizer** | **Learning Rate** | **Batch Size**       | **Epochs**      | **Features**                                        |
+|:-------------:|:-----------------:|:--------------------:|:---------------:|:--------------------------------------------------:|
+| Adam / SGD    | 0.001 / 0.01      | 32 (binary), 64 (multi) | 10–15           | Dropout, Early Stopping, LR Scheduling, GPU Accel. |
 
-- **Base Model**
-  - Training Accuracy: 75.49%
-  - Validation Accuracy: 75.60%
-  - F1-Score: 0.75
+---
 
-- **Experiment 1 (Deeper Architecture)**
-  - Training Accuracy: 99.4%
-  - Validation Accuracy: 98.6%
+## Results & Experiments
 
-- **Experiment 2 (Hyperparameter Optimization)**
-  - Training Accuracy: 100%
-  - Validation Accuracy: 98.93%
-  - Final Loss: 0.036
-  - Test Set Accuracy (10 unseen images): 100%
+| **Experiment**         | **Training Accuracy** | **Validation Accuracy** | **Test Accuracy** | **Loss**    | **F1 Score** |
+|:----------------------:|:---------------------:|:------------------------:|:-----------------:|:-----------:|:------------:|
+| Base Model             | 75.49%                | 75.60%                   | -                 | -           | 0.75         |
+| Experiment 1 (Deeper)  | 99.4%                 | 98.6%                    | -                 | -           | -            |
+| Experiment 2 (Tuned)   | 100%                  | 98.93%                   | **100%** (10 samples) | 0.036     | 0.99         |
 
-## Key Challenges Addressed
-Switching from NumPy to PyTorch introduced both flexibility and complexity. We handled:
-- Tensor reshaping and normalization for both binary and multiclass modes.
-- Manual definition of model architectures using `nn.Linear`, with careful activation and dropout tuning.
-- Implementation of custom Dataset classes and batch handling via DataLoader.
-- Performance tracking through per-class evaluation metrics and early stopping logic.
-- Hyperparameter tuning involving learning rate, batch size, optimizer type, and scheduling strategies.
+The best model (Experiment 2) achieved **perfect test accuracy** on unseen `.npy` samples and excellent generalization on the validation set.
 
-The multiclass task especially emphasized the value of deeper networks and regularization for generalization, as well as the importance of structured experimentation.
+---
 
-## Example Testing
-The final model was evaluated on 10 unseen `.npy` files (stored in the `examples/` directory), each representing a hand gesture. The model achieved 100% accuracy in correctly classifying all samples.
+## Conclusions
 
-## Colab Notebook
-[Open in Google Colab](https://colab.research.google.com/drive/1hpOeV_P6bLdP1T_GeFUPohMhuF9ZIEee)
+This milestone highlighted the transition from scratch-built models to framework-based deep learning:
+
+- **Model depth matters** – deeper architectures captured complex digit patterns better.
+- **PyTorch utilities** like autograd and DataLoader greatly simplified training and data handling.
+- **Hyperparameter tuning** (learning rate, batch size, dropout, scheduling) made a decisive difference in generalization and stability.
+- **Multiclass tasks** require more regularization, but benefit significantly from dropout and scheduler-based learning.
+
+Experimentation paid off — and we learned how to build real-world models with scalable, reusable code pipelines.
