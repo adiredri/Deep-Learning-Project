@@ -67,7 +67,7 @@ This portfolio not only enhanced our technical skills but also strengthened our 
 
 ---
 
-## Contributors
+## Project Authors
 
 - **Adir Edri**
 - **Ofir Almog** – [GitHub Profile](https://github.com/Ofigu)
