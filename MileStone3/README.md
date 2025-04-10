@@ -96,13 +96,16 @@ This model was selected as the best classifier in this configuration.
 ## Configuration 2 – Image Retrieval Using Deep Embeddings
 
 ### Overview
-In this configuration, we shifted from direct classification to visual similarity retrieval. Instead of predicting class labels, the goal was to embed each image into a feature space and retrieve the most visually similar images using K-Nearest Neighbors (KNN). We relied on deep CNN backbones to extract embeddings, then compared vectors using distance metrics (Euclidean or Cosine). This setup is useful for real-world applications like recommendation engines or visual search.
+In this configuration, we shifted from direct classification to visual similarity retrieval. Instead of predicting class labels, the goal was to embed each image into a feature space and retrieve the most visually similar images using K-Nearest Neighbors (KNN). We relied on deep CNN backbones such as ResNet-50 and DenseNet121 to extract embeddings, then compared vectors using distance metrics (Euclidean or Cosine).  
+This setup is useful for real-world applications like recommendation engines or visual search.  
+The Stanford Cars dataset was used as in previous configurations, and retrieval was performed using KNN over the learned feature embeddings.
 
 ### Shared Settings
 
-| Dataset       | Input Size | Backbone                | Optimizer | Learning Rate | Loss Function    | Batch Size | Epochs | Retrieval Metric         |
-|:-------------:|:----------:|:------------------------:|:---------:|:-------------:|:----------------:|:----------:|:------:|:------------------------:|
-| Stanford Cars | 224×224    | ResNet-50 / DenseNet121 | Adam      | 0.001         | CrossEntropyLoss | 64         | 10     | KNN (Euclidean / Cosine) |
+| Input Size | Backbone                | Optimizer | Learning Rate | Loss Function    | Batch Size | Epochs |
+|:----------:|:------------------------:|:---------:|:-------------:|:----------------:|:----------:|:------:|
+| 224×224    | ResNet-50 / DenseNet121 | Adam      | 0.001         | CrossEntropyLoss | 64         | 10     |
+
 
 ---
 
