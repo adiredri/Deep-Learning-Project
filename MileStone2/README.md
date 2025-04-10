@@ -52,22 +52,15 @@ This included experimenting with deeper networks, dropout layers, learning rate 
 
 ## Experiments & Results
 
-- **Base Model (Shallow)**  
-  - Training Accuracy: **75.49%**  
-  - Validation Accuracy: **75.60%**  
-  - F1 Score: **0.75**
+To evaluate model performance, we conducted several experiments, each targeting improvements in architecture depth, regularization, and hyperparameter tuning. Results are summarized below:
 
-- **Experiment 1 – Deeper Architecture**  
-  - Training Accuracy: **99.4%**  
-  - Validation Accuracy: **98.6%**
+| **Experiment**   | **Description**                            | **Train Accuracy** | **Val Accuracy** | **F1-Score** | **Final Loss** | **Test Accuracy** |
+|:----------------:|:-------------------------------------------|:------------------:|:----------------:|:------------:|:--------------:|:-----------------:|
+| Base Model       | Shallow baseline with default settings     | 75.49%             | 75.60%           | 0.75         | –              | –                 |
+| Experiment 1     | Deeper architecture (128 → 64)             | 99.40%             | 98.60%           | ~0.98        | –              | –                 |
+| Experiment 2     | Optimized LR, Batch Size, Dropout, EarlyStop | 100%            | 98.93%           | 0.99         | 0.036          | 100% (10/10)      |
 
-- **Experiment 2 – Hyperparameter Optimization (Best)**  
-  - Training Accuracy: **100%**  
-  - Validation Accuracy: **98.93%**  
-  - Final Loss: **0.036**  
-  - **Test Accuracy on 10 unseen .npy files**: **100%**
-
-> 🔎 Full evaluation results, per-class metrics, and confusion matrices are provided in the [full report](./MS2_Report.pdf).
+The final model (Experiment 2) showed excellent generalization, achieving perfect performance on unseen test examples.
 
 ---
 
