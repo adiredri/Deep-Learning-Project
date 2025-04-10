@@ -30,11 +30,11 @@ We fine-tuned a ResNet-50 model pre-trained on ImageNet to classify the 196 car 
 
 ### Experiments
 
-1. **Experiment 1 – Frozen Backbone (No Augmentation)** - A simple classifier was trained on top of a frozen ResNet-50. No data augmentation or regularization was used.
+- **Experiment 1 – Frozen Backbone (No Augmentation)** - A simple classifier was trained on top of a frozen ResNet-50. No data augmentation or regularization was used.
 
-2. **Experiment 2 – Frozen Backbone + Augmentation** - Same backbone, with data augmentations (RandomCrop, HorizontalFlip, Rotation). The classifier remained the only trainable part.
+- **Experiment 2 – Frozen Backbone + Augmentation** - Same backbone, with data augmentations (RandomCrop, HorizontalFlip, Rotation). The classifier remained the only trainable part.
 
-3. **Experiment 3 – Fine-Tuned Backbone + Augmentation + Dropout** - All layers were unfrozen. Dropout (p=0.5) and the same augmentations were applied.
+- **Experiment 3 – Fine-Tuned Backbone + Augmentation + Dropout** - All layers were unfrozen. Dropout (p=0.5) and the same augmentations were applied.
 
 ---
 
@@ -73,11 +73,11 @@ This configuration focused on visual similarity retrieval instead of direct clas
 
 ### Experiments
 
-1. **Experiment 1 – ResNet-50 + KNN (k = 3, Euclidean)** - Embeddings were extracted from a fine-tuned ResNet-50 and used with KNN (k = 3, Euclidean).
+- **Experiment 1 – ResNet-50 + KNN (k = 3, Euclidean)** - Embeddings were extracted from a fine-tuned ResNet-50 and used with KNN (k = 3, Euclidean).
 
-2. **Experiment 2 – ResNet-50 + KNN (k = 10, Euclidean)** - Same ResNet-50 embeddings, but KNN was configured with a larger neighborhood (k = 10) to improve robustness.
+- **Experiment 2 – ResNet-50 + KNN (k = 10, Euclidean)** - Same ResNet-50 embeddings, but KNN was configured with a larger neighborhood (k = 10) to improve robustness.
 
-3. **Experiment 3 – DenseNet121 + KNN (k = 7, Cosine Similarity)** - Switched to DenseNet121 as backbone, with embeddings of size 1024 and cosine similarity instead of Euclidean distance.
+- **Experiment 3 – DenseNet121 + KNN (k = 7, Cosine Similarity)** - Switched to DenseNet121 as backbone, with embeddings of size 1024 and cosine similarity instead of Euclidean distance.
 
 ---
 
@@ -116,11 +116,11 @@ In this configuration, we built and trained a CNN model entirely from scratch, w
 
 ### Experiments
 
-1. **Experiment 1 – Basic CNN (No Regularization)** - A minimal CNN with 3 convolutional blocks, no normalization, and no data augmentation.
+- **Experiment 1 – Basic CNN (No Regularization)** - A minimal CNN with 3 convolutional blocks, no normalization, and no data augmentation.
 
-2. **Experiment 2 – CNN + BatchNorm + Dropout** - Expanded to 4 convolutional blocks, added Batch Normalization and Dropout, still without augmentation.
+- **Experiment 2 – CNN + BatchNorm + Dropout** - Expanded to 4 convolutional blocks, added Batch Normalization and Dropout, still without augmentation.
 
-3. **Experiment 3 – Advanced CNN + Data Augmentation** - Same as Experiment 2, with added RandomCrop, HorizontalFlip, and ColorJitter augmentations. Trained for 40 epochs.
+- **Experiment 3 – Advanced CNN + Data Augmentation** - Same as Experiment 2, with added RandomCrop, HorizontalFlip, and ColorJitter augmentations. Trained for 40 epochs.
 
 ---
 
