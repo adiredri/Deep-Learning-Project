@@ -52,15 +52,18 @@ This included experimenting with deeper networks, dropout layers, learning rate 
 
 ## Experiments & Results
 
-To evaluate model performance, we conducted several experiments, each targeting improvements in architecture depth, regularization, and hyperparameter tuning. Results are summarized below:
+The following experiments were conducted to assess model performance during training and validation:
 
-| **Experiment**   | **Description**                            | **Train Accuracy** | **Val Accuracy** | **F1-Score** | **Final Loss** | **Test Accuracy** |
-|:----------------:|:-------------------------------------------|:------------------:|:----------------:|:------------:|:--------------:|:-----------------:|
-| Base Model       | Shallow baseline with default settings     | 75.49%             | 75.60%           | 0.75         | –              | –                 |
-| Experiment 1     | Deeper architecture (128 → 64)             | 99.40%             | 98.60%           | ~0.98        | –              | –                 |
-| Experiment 2     | Optimized LR, Batch Size, Dropout, EarlyStop | 100%            | 98.93%           | 0.99         | 0.036          | 100% (10/10)      |
+| **Experiment**         | **Architecture**             | **Training Accuracy** | **Validation Accuracy** | **F1-Score** |
+|:----------------------:|:-----------------------------:|:---------------------:|:------------------------:|:------------:|
+| Base Model             | 1 hidden layer (128 neurons) | 75.49%                | 75.60%                   | 0.75         |
+| Experiment 1           | 2 hidden layers (128 + 64)   | 99.40%                | 98.60%                   | 0.98         |
+| Experiment 2 (Best)    | Optimized architecture       | 100%                  | 98.93%                   | 0.99         |
 
-The final model (Experiment 2) showed excellent generalization, achieving perfect performance on unseen test examples.
+In addition to training and validation, **Experiment 2** was further evaluated on a dedicated test set of 10 unseen `.npy` files representing hand sign digits.  
+The model successfully classified **all 10 samples correctly**, yielding a **100% test accuracy**.  
+This demonstrates strong generalization beyond the validation set and confirms the effectiveness of the final architecture and hyperparameters.
+
 
 ---
 
