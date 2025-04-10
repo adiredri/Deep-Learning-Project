@@ -5,9 +5,9 @@
 In this final milestone of the "Basics of Deep Learning" course, we tackled the complex task of fine-grained image classification and retrieval using the Stanford Cars Dataset. This dataset includes 16,185 images labeled into 196 subtle car categories, with visual distinctions often limited to minor differences in shape, color, or model details.
 
 To address this challenge, we implemented three distinct deep learning configurations:
-1. Transfer Learning with a pre-trained ResNet-50
-2. Image Retrieval using feature embeddings and nearest neighbors
-3. End-to-End Convolutional Neural Network trained from scratch
+1. Transfer Learning with a pre-trained ResNet-50  
+2. Image Retrieval using feature embeddings and nearest neighbors  
+3. End-to-End Convolutional Neural Network trained from scratch  
 
 Each configuration was explored through three experiments (9 in total), which allowed us to analyze how architecture depth, regularization, fine-tuning, and augmentation strategies affect model performance.
 
@@ -21,9 +21,9 @@ In this configuration, we fine-tuned a ResNet-50 model pre-trained on ImageNet t
 
 ### Shared Settings
 
-| Backbone   | Input Size | Optimizer     | Learning Rate | Loss Function    | Batch Size | Scheduler                   | Epochs |
-|------------|------------|---------------|----------------|------------------|------------|-----------------------------|--------|
-| ResNet-50  | 224×224    | Adam          | 0.001          | CrossEntropyLoss | 32         | StepLR (γ=0.1 every 7 epochs) | 10     |
+| Backbone   | Input Size | Optimizer | Learning Rate | Loss Function    | Batch Size | Scheduler                      | Epochs |
+|:----------:|:----------:|:---------:|:-------------:|:----------------:|:----------:|:------------------------------:|:------:|
+| ResNet-50  | 224×224    | Adam      | 0.001         | CrossEntropyLoss | 32         | StepLR (γ=0.1 every 7 epochs)  | 10     |
 
 ---
 
@@ -76,7 +76,7 @@ Unfreeze all ResNet-50 layers. Add Dropout (p = 0.5) before the final layer. Use
 
 **Conclusion:**  
 This experiment significantly outperformed the others. Unfreezing the backbone allowed domain-specific features to be learned, while dropout and augmentation reduced overfitting.  
-**This model was selected as the best classifier in this configuration.**
+This model was selected as the best classifier in this configuration.
 
 ---
 
@@ -84,9 +84,10 @@ This experiment significantly outperformed the others. Unfreezing the backbone a
 
 | Experiment |              Model Description               |   Loss   | Accuracy | F1 Score | Precision | Recall |
 |:----------:|:---------------------------------------------:|:--------:|:--------:|:--------:|:---------:|:------:|
-|   Exp. 1   |      Frozen ResNet-50 (no augmentation)       |  2.3724  |  42.37%  |  41.96%  |  42.91%   | 42.37% |
-|   Exp. 2   |     Frozen + Augmentation                     |  ~2.0    | ~45–50%  | ~45–50%  |     ↑     |   ↑    |
+|   Exp. 1   | Frozen ResNet-50 (no augmentation)            |  2.3724  |  42.37%  |  41.96%  |  42.91%   | 42.37% |
+|   Exp. 2   | Frozen + Augmentation                         |  ~2.000  |  ~47.0%  |  ~47.0%  |   ~50%    |  ~47%  |
 |   Exp. 3   | Fine-tuned + Dropout + Augmentation           |  0.9012  |  73.78%  |  73.63%  |  78.18%   | 73.78% |
+
 
 ---
 
