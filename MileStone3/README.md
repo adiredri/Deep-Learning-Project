@@ -6,15 +6,15 @@ In this final milestone of the *"Basics of Deep Learning"* course, we tackled th
 
 To address this challenge, we implemented three distinct deep learning configurations:
 
-1. **Transfer Learning with a pre-trained ResNet-50** - _[Link to Notebook](https://colab.research.google.com/drive/1pQqWT0t_fVY0rUHVP46eDusuXtT_uqXP)_
-2. **Image Retrieval using feature embeddings and nearest neighbors** - _[Link to Notebook](https://colab.research.google.com/drive/1udo_D-PzcosCcCV9K5XtqfF2SUViLc8_)_
-3. **End-to-End Convolutional Neural Network trained from scratch** - _[Link to Notebook](https://colab.research.google.com/drive/1kSFLQNswStkj4WQiSAg7eEbKwJ1kSzV3)_
+1. **Transfer Learning with a pre-trained ResNet-50** - _[Link to Notebook 1](https://colab.research.google.com/drive/1pQqWT0t_fVY0rUHVP46eDusuXtT_uqXP)_
+2. **Image Retrieval using feature embeddings and nearest neighbors** - _[Link to Notebook 2](https://colab.research.google.com/drive/1udo_D-PzcosCcCV9K5XtqfF2SUViLc8_)_
+3. **End-to-End Convolutional Neural Network trained from scratch** - _[Link to Notebook 3](https://colab.research.google.com/drive/1kSFLQNswStkj4WQiSAg7eEbKwJ1kSzV3)_
 
 Each configuration was explored through three experiments, allowing us to evaluate the impact of architectural depth, regularization, and data augmentation strategies. All implementations were done in PyTorch, with classification and retrieval tasks evaluated using standard metrics.
 
-**Dataset Source**: The **Stanford Cars Dataset** can be accessed from the [Stanford Car Dataset page](http://ai.stanford.edu/~jkrause/cars/car_dataset.html).  
+**Dataset Source** - The **Stanford Cars Dataset** can be accessed from the [Stanford Car Dataset page](https://www.kaggle.com/datasets/jimgreen/stanford-cars-dataset).  
 
-**View the full report**: [MS3_Report.pdf](./MS3_Report.pdf)
+**View the full report** - [MS3_Report.pdf](./MS3_Report.pdf)
 
 ---
 
