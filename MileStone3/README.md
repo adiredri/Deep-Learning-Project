@@ -18,6 +18,7 @@ Each configuration was explored through three experiments, allowing us to evalua
 
 ## Configuration 1 - Transfer Learning with ResNet-50 and DenseNet121
 
+
 We fine-tuned pre-trained models on ImageNet to classify the 196 car categories. This configuration tested the power of transfer learning in adapting general-purpose features to a fine-grained classification task. We explored both shallow (frozen) and deep (fine-tuned/progressive) training strategies.
 
 ### Shared Settings
@@ -126,11 +127,11 @@ In this configuration, we built and trained a CNN model entirely from scratch, w
 
 ### End-to-End CNN Summary
 
-| Experiment |            Model Description             | Accuracy | F1 Score | Precision |   Loss   |
-|:----------:|:----------------------------------------:|:--------:|:--------:|:---------:|:--------:|
-|   Exp. 1   | Basic CNN (3 blocks, no regularization)  |  8.88%   |  8.52%   |   9.80%   |  4.6955  |
-|   Exp. 2   | CNN + BatchNorm + Dropout                |  8.16%   |  6.23%   |   7.17%   |  4.5436  |
-|   Exp. 3   | CNN + Augmentation + Regularization      |  72.26%  |  72.17%  |  72.99%   |  1.1026  |
+| Experiment |            Model Description             | Accuracy | F1 Score | Precision | Recall |   Loss   |
+|:----------:|:----------------------------------------:|:--------:|:--------:|:---------:|:------:|:--------:|
+|   Exp. 1   | Basic CNN (3 blocks, no regularization)  |  8.88%   |  8.52%   |   9.80%   |  8.88% |  4.6955  |
+|   Exp. 2   | CNN + BatchNorm + Dropout                |  8.16%   |  6.23%   |   7.17%   |  8.16% |  4.5436  |
+|   Exp. 3   | CNN + Augmentation + Regularization      |  72.26%  |  72.17%  |  72.99%   | 72.26% |  1.1026  |
 
 ---
 
