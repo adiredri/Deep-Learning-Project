@@ -6,11 +6,11 @@ In this final milestone of the "Basics of Deep Learning" course, we tackled the 
 
 To address this challenge, we implemented three distinct deep learning configurations:
 
-1. **Transfer Learning with a pre-trained ResNet-50 - ** _[Link to Notebook – Transfer Learning](https://colab.research.google.com/drive/1pQqWT0t_fVY0rUHVP46eDusuXtT_uqXP)_
+1. **Transfer Learning with a pre-trained ResNet-50** - _[Link to Notebook](https://colab.research.google.com/drive/1pQqWT0t_fVY0rUHVP46eDusuXtT_uqXP)_
 
-2. **Image Retrieval using feature embeddings and nearest neighbors - ** _[Link to Notebook – Image Retrieval](https://colab.research.google.com/drive/1udo_D-PzcosCcCV9K5XtqfF2SUViLc8_)_
+2. **Image Retrieval using feature embeddings and nearest neighbors** - _[Link to Notebook](https://colab.research.google.com/drive/1udo_D-PzcosCcCV9K5XtqfF2SUViLc8_)_
 
-3. **End-to-End Convolutional Neural Network trained from scratch - ** _[Link to Notebook – End-to-End CNN](https://colab.research.google.com/drive/1kSFLQNswStkj4WQiSAg7eEbKwJ1kSzV3)_
+3. **End-to-End Convolutional Neural Network trained from scratch** - _[Link to Notebook](https://colab.research.google.com/drive/1kSFLQNswStkj4WQiSAg7eEbKwJ1kSzV3)_
 
 Each configuration was explored through three experiments, allowing us to evaluate the impact of architectural depth, regularization, and data augmentation strategies. All implementations were done in PyTorch, with classification and retrieval tasks evaluated using standard metrics.
 
@@ -28,17 +28,11 @@ We fine-tuned a ResNet-50 model pre-trained on ImageNet to classify the 196 car 
 
 ---
 
-### Experiment 1 – Frozen Backbone (No Augmentation)
+1. **Experiment 1 – Frozen Backbone (No Augmentation)** - A simple classifier was trained on top of a frozen ResNet-50. No data augmentation or regularization was used.
 
-A simple classifier was trained on top of a frozen ResNet-50. No data augmentation or regularization was used.
+2. **Experiment 2 – Frozen Backbone + Augmentation** - Same backbone, with data augmentations (RandomCrop, HorizontalFlip, Rotation). The classifier remained the only trainable part.
 
-### Experiment 2 – Frozen Backbone + Augmentation
-
-Same backbone, with data augmentations (RandomCrop, HorizontalFlip, Rotation). The classifier remained the only trainable part.
-
-### Experiment 3 – Fine-Tuned Backbone + Augmentation + Dropout
-
-All layers were unfrozen. Dropout (p=0.5) and the same augmentations were applied.
+3. **Experiment 3 – Fine-Tuned Backbone + Augmentation + Dropout** - All layers were unfrozen. Dropout (p=0.5) and the same augmentations were applied.
 
 ---
 
