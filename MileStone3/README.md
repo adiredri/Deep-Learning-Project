@@ -96,27 +96,23 @@ This model was selected as the best classifier in this configuration.
 ## Configuration 2 – Image Retrieval Using Deep Embeddings
 
 ### Overview
-In this configuration, we shifted from direct classification to **visual similarity retrieval**. Instead of predicting class labels, the goal was to embed each image into a feature space and retrieve the most visually similar images using **K-Nearest Neighbors (KNN)**. We relied on deep CNN backbones to extract embeddings, then compared vectors using distance metrics (Euclidean or Cosine). This setup is useful for real-world applications like recommendation engines or visual search.
+In this configuration, we shifted from direct classification to visual similarity retrieval. Instead of predicting class labels, the goal was to embed each image into a feature space and retrieve the most visually similar images using K-Nearest Neighbors (KNN). We relied on deep CNN backbones to extract embeddings, then compared vectors using distance metrics (Euclidean or Cosine). This setup is useful for real-world applications like recommendation engines or visual search.
 
-### Shared Setup
-- Dataset: Stanford Cars (16,185 cropped images, 196 categories)
-- Input Size: 224×224
-- Embedding Extractor: CNN backbone (ResNet50 / DenseNet121)
-- Normalization: ImageNet statistics
-- Optimizer: Adam (lr = 0.001)
-- Loss: CrossEntropyLoss
-- Batch Size: 64
-- Training Epochs: 10
-- Retrieval Metric: KNN (Euclidean or Cosine)
+### Shared Settings
+
+| Dataset       | Input Size | Backbone                | Optimizer | Learning Rate | Loss Function    | Batch Size | Epochs | Retrieval Metric         |
+|:-------------:|:----------:|:------------------------:|:---------:|:-------------:|:----------------:|:----------:|:------:|:------------------------:|
+| Stanford Cars | 224×224    | ResNet-50 / DenseNet121 | Adam      | 0.001         | CrossEntropyLoss | 64         | 10     | KNN (Euclidean / Cosine) |
 
 ---
 
-### Experiment 1 – ResNet-50 + KNN (k=3, Euclidean)
-**Goal:** Evaluate embedding quality with a basic KNN setup  
+### Experiment 1 – ResNet-50 + KNN (k = 3, Euclidean)
+
+**Goal:**  
+Evaluate embedding quality with a basic KNN setup.
+
 **Setup:**  
-- Fine-tuned ResNet-50 (same as in classification config)  
-- Extract embeddings (2048-dim)  
-- KNN with k=3, Euclidean distance
+Fine-tuned ResNet-50 (same as classification config), embedding size: 2048, KNN with k = 3 using Euclidean distance.
 
 **Results:**  
 - Accuracy: 74.93%  
@@ -127,15 +123,17 @@ In this configuration, we shifted from direct classification to **visual similar
 - Predict Time: 1.1998s
 
 **Conclusion:**  
-This baseline setup achieved decent retrieval quality. A small `k` resulted in local consistency but sometimes lacked diversity for ambiguous samples.
+This baseline setup achieved decent retrieval quality. A small k resulted in local consistency but sometimes lacked diversity for ambiguous samples.
 
 ---
 
-### Experiment 2 – ResNet-50 + KNN (k=10, Euclidean)
-**Goal:** Improve robustness with a wider neighborhood  
+### Experiment 2 – ResNet-50 + KNN (k = 10, Euclidean)
+
+**Goal:**  
+Improve robustness with a wider neighborhood.
+
 **Setup:**  
-- Same embedding extractor (ResNet-50)  
-- KNN with k=10, Euclidean distance
+Same embedding extractor (ResNet-50), KNN with k = 10 using Euclidean distance.
 
 **Results:**  
 - Accuracy: 76.77%  
@@ -146,16 +144,17 @@ This baseline setup achieved decent retrieval quality. A small `k` resulted in l
 - Predict Time: 1.3873s
 
 **Conclusion:**  
-Increasing `k` improved robustness and overall accuracy. Larger neighborhoods compensated for class overlaps, making this the **best-performing model** in this configuration.
+Increasing k improved robustness and overall accuracy. Larger neighborhoods compensated for class overlaps, and this model achieved the best retrieval performance in this configuration.
 
 ---
 
-### Experiment 3 – DenseNet121 + KNN (k=7, Cosine Similarity)
-**Goal:** Evaluate alternative backbone and distance metric  
+### Experiment 3 – DenseNet121 + KNN (k = 7, Cosine Similarity)
+
+**Goal:**  
+Evaluate alternative backbone and distance metric.
+
 **Setup:**  
-- Progressive unfreezing of DenseNet121  
-- Embedding size: 1024  
-- KNN with k=7, Cosine similarity
+Progressive unfreezing of DenseNet121, embedding size: 1024, KNN with k = 7 using Cosine similarity.
 
 **Results:**  
 - Accuracy: 73.41%  
@@ -166,24 +165,23 @@ Increasing `k` improved robustness and overall accuracy. Larger neighborhoods co
 - Predict Time: 1.0178s
 
 **Conclusion:**  
-Although slightly weaker in accuracy, this model offered **fast inference** and stable retrieval quality. Cosine similarity proved beneficial for normalized embeddings, and DenseNet's compact architecture reduced overhead.
+Although slightly weaker in accuracy, this model offered fast inference and stable retrieval quality. Cosine similarity proved beneficial for normalized embeddings, and DenseNet’s compact design reduced inference overhead.
 
 ---
 
 ### Image Retrieval Summary
 
-| Experiment | Model Description                  | Accuracy | F1 Score | Precision | Recall | Predict Time |
-|------------|------------------------------------|----------|----------|-----------|--------|---------------|
-| Exp. 1     | ResNet-50 + KNN (k=3, Euclidean)   | 74.93%   | 75.23%   | 77.38%    | 74.93% | 1.1998s       |
-| Exp. 2     | ResNet-50 + KNN (k=10, Euclidean)  | 76.77%   | 76.77%   | 78.81%    | 76.77% | 1.3873s       |
-| Exp. 3     | DenseNet121 + KNN (k=7, Cosine)    | 73.41%   | 73.49%   | 75.33%    | 73.41% | 1.0178s       |
-
-> Best model: **Experiment 2 – ResNet-50 + KNN (k=10)**  
-> Best for speed: **Experiment 3 – DenseNet + Cosine Similarity**
+| Experiment |             Model Description              | Accuracy | F1 Score | Precision | Recall | Predict Time |
+|:----------:|:------------------------------------------:|:--------:|:--------:|:---------:|:------:|:------------:|
+|   Exp. 1   | ResNet-50 + KNN (k = 3, Euclidean)          | 74.93%   | 75.23%   | 77.38%    | 74.93% |   1.1998s    |
+|   Exp. 2   | ResNet-50 + KNN (k = 10, Euclidean)         | 76.77%   | 76.77%   | 78.81%    | 76.77% |   1.3873s    |
+|   Exp. 3   | DenseNet121 + KNN (k = 7, Cosine Similarity) | 73.41%   | 73.49%   | 75.33%    | 73.41% |   1.0178s    |
 
 ---
 
-This configuration highlighted the power of learned embeddings for **image-to-image retrieval**. It also showed how changing distance metrics and model backbones affects both accuracy and latency, offering options for different deployment needs.
+This configuration highlighted the power of learned embeddings for image-to-image retrieval. It also showed how changing distance metrics and model backbones affects both accuracy and latency, offering flexible solutions depending on task requirements.  
+The best retrieval performance was achieved with **ResNet-50 + KNN (k = 10)**, while **DenseNet121 + Cosine** offered the fastest inference.
+
 
 ---
 
