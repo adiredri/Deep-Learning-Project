@@ -6,14 +6,11 @@ In this final milestone of the "Basics of Deep Learning" course, we tackled the 
 
 To address this challenge, we implemented three distinct deep learning configurations:
 
-1. **Transfer Learning with a pre-trained ResNet-50**  
-   _[Link to Notebook – Transfer Learning](https://colab.research.google.com/drive/1pQqWT0t_fVY0rUHVP46eDusuXtT_uqXP)_
+1. **Transfer Learning with a pre-trained ResNet-50 - ** _[Link to Notebook – Transfer Learning](https://colab.research.google.com/drive/1pQqWT0t_fVY0rUHVP46eDusuXtT_uqXP)_
 
-2. **Image Retrieval using feature embeddings and nearest neighbors**  
-   _[Link to Notebook – Image Retrieval](https://colab.research.google.com/drive/1udo_D-PzcosCcCV9K5XtqfF2SUViLc8_)_
+2. **Image Retrieval using feature embeddings and nearest neighbors - ** _[Link to Notebook – Image Retrieval](https://colab.research.google.com/drive/1udo_D-PzcosCcCV9K5XtqfF2SUViLc8_)_
 
-3. **End-to-End Convolutional Neural Network trained from scratch**  
-   _[Link to Notebook – End-to-End CNN](https://colab.research.google.com/drive/1kSFLQNswStkj4WQiSAg7eEbKwJ1kSzV3)_
+3. **End-to-End Convolutional Neural Network trained from scratch - ** _[Link to Notebook – End-to-End CNN](https://colab.research.google.com/drive/1kSFLQNswStkj4WQiSAg7eEbKwJ1kSzV3)_
 
 Each configuration was explored through three experiments, allowing us to evaluate the impact of architectural depth, regularization, and data augmentation strategies. All implementations were done in PyTorch, with classification and retrieval tasks evaluated using standard metrics.
 
@@ -35,13 +32,9 @@ We fine-tuned a ResNet-50 model pre-trained on ImageNet to classify the 196 car 
 
 A simple classifier was trained on top of a frozen ResNet-50. No data augmentation or regularization was used.
 
----
-
 ### Experiment 2 – Frozen Backbone + Augmentation
 
 Same backbone, with data augmentations (RandomCrop, HorizontalFlip, Rotation). The classifier remained the only trainable part.
-
----
 
 ### Experiment 3 – Fine-Tuned Backbone + Augmentation + Dropout
 
@@ -86,13 +79,9 @@ This configuration focused on visual similarity retrieval instead of direct clas
 
 Embeddings were extracted from a fine-tuned ResNet-50 and used with KNN (k = 3, Euclidean).
 
----
-
 ### Experiment 2 – ResNet-50 + KNN (k = 10, Euclidean)
 
 Same ResNet-50 embeddings, but KNN was configured with a larger neighborhood (k = 10) to improve robustness.
-
----
 
 ### Experiment 3 – DenseNet121 + KNN (k = 7, Cosine Similarity)
 
@@ -137,19 +126,13 @@ In this configuration, we built and trained a CNN model entirely from scratch, w
 
 A minimal CNN with 3 convolutional blocks, no normalization, and no data augmentation.
 
----
-
 ### Experiment 2 – CNN + BatchNorm + Dropout
 
 Expanded to 4 convolutional blocks, added Batch Normalization and Dropout, still without augmentation.
 
----
-
 ### Experiment 3 – Advanced CNN + Data Augmentation
 
 Same as Experiment 2, with added RandomCrop, HorizontalFlip, and ColorJitter augmentations. Trained for 40 epochs.
-
----
 
 ### End-to-End CNN Summary
 
