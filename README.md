@@ -69,6 +69,6 @@ This portfolio not only enhanced our technical skills but also strengthened our 
 
 ## Project Authors
 
-- **Adir Edri**
+- [Adir Edri](https://github.com/adiredri)
 - [Ofir Almog](https://github.com/Ofigu)
 
