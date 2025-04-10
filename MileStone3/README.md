@@ -2,17 +2,19 @@
 
 ## Introduction
 
-In this final milestone of the "Basics of Deep Learning" course, we tackled the complex task of fine-grained image classification and retrieval using the Stanford Cars Dataset. This dataset includes 16,185 images labeled into 196 subtle car categories, with visual distinctions often limited to minor differences in shape, color, or model details.
+In this final milestone of the *"Basics of Deep Learning"* course, we tackled the complex task of fine-grained image classification and retrieval using the **Stanford Cars Dataset**. This dataset includes 16,185 images labeled into 196 subtle car categories, with visual distinctions often limited to minor differences in shape, color, or model details. The challenge was to build models that can accurately classify and retrieve images of cars from these categories.
 
 To address this challenge, we implemented three distinct deep learning configurations:
 
 1. **Transfer Learning with a pre-trained ResNet-50** - _[Link to Notebook](https://colab.research.google.com/drive/1pQqWT0t_fVY0rUHVP46eDusuXtT_uqXP)_
-
 2. **Image Retrieval using feature embeddings and nearest neighbors** - _[Link to Notebook](https://colab.research.google.com/drive/1udo_D-PzcosCcCV9K5XtqfF2SUViLc8_)_
-
 3. **End-to-End Convolutional Neural Network trained from scratch** - _[Link to Notebook](https://colab.research.google.com/drive/1kSFLQNswStkj4WQiSAg7eEbKwJ1kSzV3)_
 
 Each configuration was explored through three experiments, allowing us to evaluate the impact of architectural depth, regularization, and data augmentation strategies. All implementations were done in PyTorch, with classification and retrieval tasks evaluated using standard metrics.
+
+**Dataset Source**: The **Stanford Cars Dataset** can be accessed from the [Stanford Car Dataset page](http://ai.stanford.edu/~jkrause/cars/car_dataset.html).  
+
+**View the full report**: [MS3_Report.pdf](./MS3_Report.pdf)
 
 ---
 
