@@ -16,7 +16,7 @@ Each configuration was explored through three experiments, allowing us to evalua
 
 ---
 
-## Configuration 1 - Transfer Learning
+## Configuration 1 - Transfer Learning with ResNet-50
 
 We fine-tuned a ResNet-50 model pre-trained on ImageNet to classify the 196 car categories. This configuration tested the power of transfer learning in adapting general-purpose features to a fine-grained classification task.
 
