@@ -16,46 +16,46 @@ Each configuration was explored through three experiments, allowing us to evalua
 
 ---
 
-## Configuration 1 - Transfer Learning with ResNet-50
+## Configuration 1 - Transfer Learning with ResNet-50 and DenseNet121
 
-We fine-tuned a ResNet-50 model pre-trained on ImageNet to classify the 196 car categories. This configuration tested the power of transfer learning in adapting general-purpose features to a fine-grained classification task.
+We fine-tuned pre-trained models on ImageNet to classify the 196 car categories. This configuration tested the power of transfer learning in adapting general-purpose features to a fine-grained classification task. We explored both shallow (frozen) and deep (fine-tuned/progressive) training strategies.
 
 ### Shared Settings
 
-| Backbone   | Input Size | Optimizer | Learning Rate | Loss Function    | Batch Size | Scheduler                      | Epochs |
-|:----------:|:----------:|:---------:|:-------------:|:----------------:|:----------:|:------------------------------:|:------:|
-| ResNet-50  | 224×224    | Adam      | 0.001         | CrossEntropyLoss | 32         | StepLR (γ=0.1 every 7 epochs)  | 10     |
+| Backbone     | Input Size | Optimizer | Learning Rate | Loss Function    | Batch Size | Scheduler                      | Epochs |
+|:------------:|:----------:|:---------:|:-------------:|:----------------:|:----------:|:------------------------------:|:------:|
+| ResNet-50 / DenseNet121 | 224×224    | Adam      | 0.001         | CrossEntropyLoss | 32         | StepLR (γ=0.1 every 7 epochs)  | 10     |
 
 ---
 
 ### Experiments
 
-- **Experiment 1 - Frozen Backbone (No Augmentation)** - A simple classifier was trained on top of a frozen ResNet-50. No data augmentation or regularization was used.
+- **Experiment 1 - ResNet-50 (Frozen)** – Only the classification head was trained. The backbone was frozen, and no augmentation or regularization was used.
 
-- **Experiment 2 - Frozen Backbone + Augmentation** - Same backbone, with data augmentations (RandomCrop, HorizontalFlip, Rotation). The classifier remained the only trainable part.
+- **Experiment 2 - ResNet-50 (Fine-Tuned + Aug + Dropout)** – All layers were unfrozen. Data augmentation (RandomCrop, Flip, Rotation) and Dropout (p=0.5) were used.
 
-- **Experiment 3 - Fine-Tuned Backbone + Augmentation + Dropout** - All layers were unfrozen. Dropout (p=0.5) and the same augmentations were applied.
+- **Experiment 3 - DenseNet121 (Progressive Unfreezing)** – Used DenseNet121 with gradual unfreezing and same augmentations. Aimed to explore a more compact yet powerful architecture.
 
 ---
 
 ### Transfer Learning Summary
 
-| Experiment |              Model Description               |   Loss   | Accuracy | F1 Score | Precision | Recall |
-|:----------:|:---------------------------------------------:|:--------:|:--------:|:--------:|:---------:|:------:|
-|   Exp. 1   | Frozen ResNet-50 (no augmentation)            |  2.3724  |  42.37%  |  41.96%  |  42.91%   | 42.37% |
-|   Exp. 2   | Frozen + Augmentation                         |  ~2.000  |  ~47.0%  |  ~47.0%  |   ~50%    |  ~47%  |
-|   Exp. 3   | Fine-tuned + Dropout + Augmentation           |  0.9012  |  73.78%  |  73.63%  |  78.18%   | 73.78% |
+| Experiment |             Model Description              |   Loss   | Accuracy | F1 Score | Precision | Recall |
+|:----------:|:------------------------------------------:|:--------:|:--------:|:--------:|:---------:|:------:|
+|   Exp. 1   | ResNet-50 – Frozen                         |  2.3724  |  42.37%  |  41.96%  |  42.91%   | 42.37% |
+|   Exp. 2   | ResNet-50 – Fine-Tuned + Aug + Dropout     |  0.9012  |  73.78%  |  73.63%  |  78.18%   | 73.78% |
+|   Exp. 3   | DenseNet121 – Progressive Unfreezing       |  1.0800  |  71.69%  |  71.70%  |  75.43%   | 71.69% |
 
 ---
 
 ### Conclusions - Transfer Learning
 
-This configuration clearly demonstrated the benefit of progressive improvement:  
-- Using a frozen backbone alone was not sufficient.  
-- Adding augmentation improved generalization slightly.  
-- Fine-tuning the entire network combined with dropout and augmentation resulted in a significant performance boost.
+This configuration confirmed the strength of transfer learning for fine-grained tasks:
+- The frozen backbone alone produced weak results.
+- Fine-tuning with regularization significantly improved performance.
+- DenseNet121 performed well, though slightly behind the fine-tuned ResNet-50.
 
-The best model in this configuration was **Experiment 3**, which achieved the highest accuracy and F1 score. This model was later selected as the final classification model for deployment.
+The best model in this configuration was **Experiment 2 – ResNet-50 Fine-Tuned**, which reached the highest accuracy and F1 Score. It was later used as the baseline for deployment.
 
 ---
 
