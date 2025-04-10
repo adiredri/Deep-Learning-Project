@@ -2,40 +2,37 @@
 
 ## Introduction
 
-In this final milestone of the "Basics of Deep Learning" course, we tackled the complex task of **fine-grained image classification and retrieval** using the **Stanford Cars Dataset**. This dataset includes 16,185 images labeled into 196 subtle car categories, with visual distinctions often limited to minor differences in shape, color, or model details.
+In this final milestone of the "Basics of Deep Learning" course, we tackled the complex task of fine-grained image classification and retrieval using the Stanford Cars Dataset. This dataset includes 16,185 images labeled into 196 subtle car categories, with visual distinctions often limited to minor differences in shape, color, or model details.
 
-To address this challenge, we implemented **three distinct deep learning configurations**:
+To address this challenge, we implemented three distinct deep learning configurations:
 1. Transfer Learning with a pre-trained ResNet-50
 2. Image Retrieval using feature embeddings and nearest neighbors
 3. End-to-End Convolutional Neural Network trained from scratch
 
-Each configuration was explored through **three experiments** (9 in total), which allowed us to analyze how architecture depth, regularization, fine-tuning, and augmentation strategies affect model performance.
+Each configuration was explored through three experiments (9 in total), which allowed us to analyze how architecture depth, regularization, fine-tuning, and augmentation strategies affect model performance.
 
-All models were implemented in **PyTorch**, and each configuration was tested with both classification and retrieval-focused metrics where applicable.
+All models were implemented in PyTorch, and each configuration was tested with both classification and retrieval-focused metrics where applicable.
 
 ---
 
 ## Configuration 1 – Transfer Learning
 
-In this configuration, we fine-tuned a **ResNet-50** model pre-trained on **ImageNet** to classify the 196 car categories in our dataset. This approach aimed to leverage generalized visual features already learned by the model and adapt them to our fine-grained domain.
+In this configuration, we fine-tuned a ResNet-50 model pre-trained on ImageNet to classify the 196 car categories in our dataset. This approach aimed to leverage generalized visual features already learned by the model and adapt them to our fine-grained domain.
 
 ### Shared Settings
-- **Backbone**: ResNet-50
-- **Input Size**: 224×224
-- **Optimizer**: Adam (lr = 0.001)
-- **Loss**: CrossEntropyLoss
-- **Batch Size**: 32
-- **Scheduler**: StepLR (γ=0.1 every 7 epochs)
-- **Training Epochs**: 10
+
+| Backbone   | Input Size | Optimizer     | Learning Rate | Loss Function    | Batch Size | Scheduler                   | Epochs |
+|------------|------------|---------------|----------------|------------------|------------|-----------------------------|--------|
+| ResNet-50  | 224×224    | Adam          | 0.001          | CrossEntropyLoss | 32         | StepLR (γ=0.1 every 7 epochs) | 10     |
 
 ---
 
 ### Experiment 1 – Base Model (Frozen Backbone)
-**Goal:** Evaluate out-of-the-box generalization of ImageNet features  
+**Goal:**  
+Evaluate out-of-the-box generalization of ImageNet features.
+
 **Setup:**  
-- Freeze entire ResNet-50 backbone  
-- Train only the final classification head (2048 → 196)  
-- No augmentation or regularization
+Freeze the entire ResNet-50 backbone. Train only the final classification head (2048 → 196). No data augmentation or regularization.
 
 **Results:**  
 - Accuracy: 42.37%  
@@ -48,15 +45,15 @@ The model struggled to generalize, showing that the final classifier alone can't
 ---
 
 ### Experiment 2 – Frozen Backbone + Data Augmentation
-**Goal:** Explore how basic data augmentation affects performance  
+**Goal:**  
+Explore how basic data augmentation affects performance.
+
 **Setup:**  
-- Same frozen backbone  
-- Augmentations: RandomCrop, HorizontalFlip, Rotation (±15°)  
-- Classifier remains the only trainable layer
+Same frozen backbone. Applied RandomCrop, HorizontalFlip, and Rotation (±15°). The classifier remains the only trainable layer.
 
 **Results:**  
 - Moderate improvement in validation accuracy and stability  
-- Lower loss and slight boost in precision and recall
+- Lower loss and a slight boost in precision and recall
 
 **Conclusion:**  
 Even with a fixed backbone, data augmentation enriches the training signal and improves generalization. However, the model’s ceiling is limited without access to deeper layers.
@@ -64,11 +61,11 @@ Even with a fixed backbone, data augmentation enriches the training signal and i
 ---
 
 ### Experiment 3 – Fine-Tuned Backbone + Augmentation + Dropout
-**Goal:** Unlock the full potential of the backbone with regularization  
+**Goal:**  
+Unlock the full potential of the backbone with regularization.
+
 **Setup:**  
-- Unfreeze all ResNet-50 layers  
-- Add Dropout(p=0.5) before the final layer  
-- Use same augmentations as Exp. 2
+Unfreeze all ResNet-50 layers. Add Dropout (p = 0.5) before the final layer. Use the same augmentations as in Experiment 2.
 
 **Results:**  
 - Accuracy: 73.78%  
@@ -78,21 +75,21 @@ Even with a fixed backbone, data augmentation enriches the training signal and i
 - Recall: 73.78%
 
 **Conclusion:**  
-This experiment significantly outperformed the others. Unfreezing the backbone allowed domain-specific features to be learned, while dropout and augmentation reduced overfitting. This model was **selected as the best classifier** in this configuration.
+This experiment significantly outperformed the others. Unfreezing the backbone allowed domain-specific features to be learned, while dropout and augmentation reduced overfitting.  
+**This model was selected as the best classifier in this configuration.**
 
 ---
 
 ### Transfer Learning Summary
 
-| Experiment | Model Description                 | Loss   | Accuracy | F1 Score | Precision | Recall |
-|------------|-----------------------------------|--------|----------|----------|-----------|--------|
-| Exp. 1     | Frozen ResNet-50 (no aug)         | 2.3724 | 42.37%   | 41.96%   | 42.91%    | 42.37% |
-| Exp. 2     | Frozen + Augmentation             | ~2.0   | ~45–50%  | ~45–50%  | ↑         | ↑      |
-| Exp. 3     | Fine-tuned + Dropout + Aug        | 0.9012 | 73.78%   | 73.63%   | 78.18%    | 73.78% |
-
-> Best model: **Experiment 3 – Fine-Tuned ResNet-50 with Dropout and Augmentation**
+| Experiment |              Model Description               |   Loss   | Accuracy | F1 Score | Precision | Recall |
+|:----------:|:---------------------------------------------:|:--------:|:--------:|:--------:|:---------:|:------:|
+|   Exp. 1   |      Frozen ResNet-50 (no augmentation)       |  2.3724  |  42.37%  |  41.96%  |  42.91%   | 42.37% |
+|   Exp. 2   |     Frozen + Augmentation                     |  ~2.0    | ~45–50%  | ~45–50%  |     ↑     |   ↑    |
+|   Exp. 3   | Fine-tuned + Dropout + Augmentation           |  0.9012  |  73.78%  |  73.63%  |  78.18%   | 73.78% |
 
 ---
+
 
 ## Configuration 2 – Image Retrieval Using Deep Embeddings
 
