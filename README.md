@@ -82,7 +82,7 @@ This portfolio not only enhanced our technical skills but also strengthened our 
   </tr>
   <tr>
     <td align="center" width="96"><img src="https://miro.medium.com/v2/resize:fit:1001/1*vPezx00A1u0WAfS8e8wBXQ.png" width="48" height="48" alt="NumPy" /><br>NumPy</td>
-    <td align="center" width="96"><img src="https://geo-python-site.readthedocs.io/en/latest/_images/pandas_logo.png" width="55" height="48" alt="Pandas" /><br>Pandas</td>
+    <td align="center" width="96"><img src="https://img.icons8.com/color/512/pandas.png" width="55" height="48" alt="Pandas" /><br>Pandas</td>
     <td align="center" width="96"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/Matplotlib_icon.svg/2048px-Matplotlib_icon.svg.png" width="48" height="48" alt="Matplotlib" /><br>Matplotlib</td>
     <td align="center" width="96"><img src="https://skillicons.dev/icons?i=pytorch" width="48" height="48" alt="PyTorch"/><br>PyTorch</td>
     <td align="center" width="96"><img src="https://upload.wikimedia.org/wikipedia/commons/0/05/Scikit_learn_logo_small.svg" width="48" height="48" alt="scikit-learn" /><br>scikit-learn</td>
