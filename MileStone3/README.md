@@ -12,7 +12,7 @@ To address this challenge, we implemented three distinct deep learning configura
 
 Each configuration was explored through three experiments, allowing us to evaluate the impact of architectural depth, regularization, and data augmentation strategies. All implementations were done in PyTorch, with classification and retrieval tasks evaluated using standard metrics.
 
-**Dataset Source** - The **Stanford Cars Dataset** can be accessed from the [Stanford Car Dataset page](https://www.kaggle.com/datasets/jimgreen/stanford-cars-dataset).  
+**Dataset Source** - The dataset we used is sourced from: [Stanford Cars Dataset on Kaggle](https://www.kaggle.com/datasets/jimgreen/stanford-cars-dataset). 
 
 **View the full report** - [MS3_Report.pdf](./MS3_Report.pdf)
 
