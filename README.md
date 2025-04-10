@@ -74,8 +74,8 @@ This portfolio not only enhanced our technical skills but also strengthened our 
 <div style="display: flex; align-items: flex-start; align: center">
 <table align="center">
   <tr> 
-    <td align="center" width="96"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/Google_Colaboratory_SVG_Logo.svg/512px-Google_Colaboratory_SVG_Logo.svg.png" width="48" height="48" alt="Colab" /><br>Colab</td>
-    <td align="center" width="96"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/Overleaf_logo.svg/2560px-Overleaf_logo.svg.png" width="48" height="48" alt="Overleaf" /><br>Overleaf</td>
+    <td align="center" width="96"><img src="https://colab.research.google.com/img/colab_favicon_256px.png" width="48" height="48" alt="Colab" /><br>Colab</td>
+    <td align="center" width="96"><img src="https://upload.wikimedia.org/wikipedia/commons/3/31/Overleaf_logo.svg" width="48" height="48" alt="Overleaf" /><br>Overleaf</td>
     <td align="center" width="96"><img src="https://upload.wikimedia.org/wikipedia/commons/7/7c/Kaggle_logo.png" width="48" height="48" alt="Kaggle" /><br>Kaggle</td>
     <td align="center" width="96"><img src="https://raw.githubusercontent.com/Azure/ObjectDetectionUsingYoloV3/master/media/yolo-logo.png" width="48" height="48" alt="YOLO" /><br>YOLO</td>
     <td align="center" width="96"><img src="https://techstack-generator.vercel.app/python-icon.svg" width="65" height="65" alt="Python" /><br>Python</td>
@@ -91,6 +91,7 @@ This portfolio not only enhanced our technical skills but also strengthened our 
 </div>
 
 <!-- END TABLE -->
+
 
 
 ---
