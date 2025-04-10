@@ -6,11 +6,14 @@ In this final milestone of the "Basics of Deep Learning" course, we tackled the 
 
 To address this challenge, we implemented three distinct deep learning configurations:
 
-1. **Transfer Learning with a pre-trained ResNet-50** - _[Link to Notebook](https://colab.research.google.com/drive/1pQqWT0t_fVY0rUHVP46eDusuXtT_uqXP)_
+1. **Transfer Learning with a pre-trained ResNet-50**  
+   _[Link to Notebook – Transfer Learning](https://colab.research.google.com/drive/1pQqWT0t_fVY0rUHVP46eDusuXtT_uqXP)_
 
-2. **Image Retrieval using feature embeddings and nearest neighbors** - _[Link to Notebook](https://colab.research.google.com/drive/1udo_D-PzcosCcCV9K5XtqfF2SUViLc8_)_
+2. **Image Retrieval using feature embeddings and nearest neighbors**  
+   _[Link to Notebook – Image Retrieval](https://colab.research.google.com/drive/1udo_D-PzcosCcCV9K5XtqfF2SUViLc8_)_
 
-3. **End-to-End Convolutional Neural Network trained from scratch** - _[Link to Notebook](https://colab.research.google.com/drive/1kSFLQNswStkj4WQiSAg7eEbKwJ1kSzV3)_
+3. **End-to-End Convolutional Neural Network trained from scratch**  
+   _[Link to Notebook – End-to-End CNN](https://colab.research.google.com/drive/1kSFLQNswStkj4WQiSAg7eEbKwJ1kSzV3)_
 
 Each configuration was explored through three experiments, allowing us to evaluate the impact of architectural depth, regularization, and data augmentation strategies. All implementations were done in PyTorch, with classification and retrieval tasks evaluated using standard metrics.
 
@@ -32,35 +35,17 @@ We fine-tuned a ResNet-50 model pre-trained on ImageNet to classify the 196 car 
 
 A simple classifier was trained on top of a frozen ResNet-50. No data augmentation or regularization was used.
 
-**Results:**  
-- Accuracy: 42.37%  
-- F1 Score: 41.96%  
-- Loss: 2.3724
-
 ---
 
 ### Experiment 2 – Frozen Backbone + Augmentation
 
 Same backbone, with data augmentations (RandomCrop, HorizontalFlip, Rotation). The classifier remained the only trainable part.
 
-**Results:**  
-- Accuracy: ~47%  
-- F1 Score: ~47%  
-- Precision: ~50%  
-- Loss: ~2.000
-
 ---
 
 ### Experiment 3 – Fine-Tuned Backbone + Augmentation + Dropout
 
 All layers were unfrozen. Dropout (p=0.5) and the same augmentations were applied.
-
-**Results:**  
-- Accuracy: 73.78%  
-- F1 Score: 73.63%  
-- Precision: 78.18%  
-- Recall: 73.78%  
-- Loss: 0.9012
 
 ---
 
@@ -77,8 +62,8 @@ All layers were unfrozen. Dropout (p=0.5) and the same augmentations were applie
 ### Conclusions – Transfer Learning
 
 This configuration clearly demonstrated the benefit of progressive improvement:  
-- Using a frozen backbone alone was not sufficient.
-- Adding augmentation improved generalization slightly.
+- Using a frozen backbone alone was not sufficient.  
+- Adding augmentation improved generalization slightly.  
 - Fine-tuning the entire network combined with dropout and augmentation resulted in a significant performance boost.
 
 The best model in this configuration was **Experiment 3**, which achieved the highest accuracy and F1 score. This model was later selected as the final classification model for deployment.
@@ -101,38 +86,17 @@ This configuration focused on visual similarity retrieval instead of direct clas
 
 Embeddings were extracted from a fine-tuned ResNet-50 and used with KNN (k = 3, Euclidean).
 
-**Results:**  
-- Accuracy: 74.93%  
-- F1 Score: 75.23%  
-- Precision: 77.38%  
-- Recall: 74.93%  
-- Predict Time: 1.1998s
-
 ---
 
 ### Experiment 2 – ResNet-50 + KNN (k = 10, Euclidean)
 
 Same ResNet-50 embeddings, but KNN was configured with a larger neighborhood (k = 10) to improve robustness.
 
-**Results:**  
-- Accuracy: 76.77%  
-- F1 Score: 76.77%  
-- Precision: 78.81%  
-- Recall: 76.77%  
-- Predict Time: 1.3873s
-
 ---
 
 ### Experiment 3 – DenseNet121 + KNN (k = 7, Cosine Similarity)
 
 Switched to DenseNet121 as backbone, with embeddings of size 1024 and cosine similarity instead of Euclidean distance.
-
-**Results:**  
-- Accuracy: 73.41%  
-- F1 Score: 73.49%  
-- Precision: 75.33%  
-- Recall: 73.41%  
-- Predict Time: 1.0178s
 
 ---
 
@@ -171,35 +135,19 @@ In this configuration, we built and trained a CNN model entirely from scratch, w
 
 ### Experiment 1 – Basic CNN (No Regularization)
 
-A minimal CNN with 3 convolutional blocks and no regularization or data augmentation.
-
-**Results:**  
-- Accuracy: 8.88%  
-- F1 Score: 8.52%  
-- Loss: 4.6955
+A minimal CNN with 3 convolutional blocks, no normalization, and no data augmentation.
 
 ---
 
 ### Experiment 2 – CNN + BatchNorm + Dropout
 
-Expanded to 4 convolutional blocks. Added Batch Normalization and Dropout (p = 0.5), but still no augmentation.
-
-**Results:**  
-- Accuracy: 8.16%  
-- F1 Score: 6.23%  
-- Loss: 4.5436
+Expanded to 4 convolutional blocks, added Batch Normalization and Dropout, still without augmentation.
 
 ---
 
 ### Experiment 3 – Advanced CNN + Data Augmentation
 
-Same as Experiment 2, with the addition of augmentations (RandomCrop, HorizontalFlip, ColorJitter). Trained for 40 epochs.
-
-**Results:**  
-- Accuracy: 72.26%  
-- F1 Score: 72.17%  
-- Precision: 72.99%  
-- Loss: 1.1026
+Same as Experiment 2, with added RandomCrop, HorizontalFlip, and ColorJitter augmentations. Trained for 40 epochs.
 
 ---
 
@@ -240,5 +188,3 @@ In summary, each configuration serves different practical needs:
 - Use **End-to-End CNN** when full customization or architectural research is needed.
 
 This project deepened our understanding of deep learning design, training stability, and performance evaluation under different constraints — from off-the-shelf reuse to scratch-built solutions.
-
-
