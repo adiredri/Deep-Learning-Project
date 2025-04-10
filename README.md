@@ -16,7 +16,7 @@ We began by building a feedforward neural network **entirely from scratch using 
 
 The model reached an impressive **95.6% accuracy** and taught us foundational deep learning concepts from the ground up.
 
-📎 [Read full details here](milestone1/README.md)
+📎 [Read full details here](MileStone1/README.md)
 
 ---
 
@@ -30,7 +30,7 @@ In this stage, we transitioned to **PyTorch**, re-implementing the binary classi
 
 The multiclass model achieved **98.93% validation accuracy** and **100% test accuracy** on unseen `.npy` examples.
 
-📎 [Read full details here](milestone2/README.md)
+📎 [Read full details here](MileStone2/README.md)
 
 ---
 
@@ -51,11 +51,11 @@ The final milestone tackled a **fine-grained classification task** using the **S
 - Custom architecture with 4 conv blocks, batchnorm, and augmentation.
 - Final model reached **72.26% accuracy**, demonstrating competitive results even without pre-training.
 
-📎 [Read full details here](milestone3/README.md)
+📎 [Read full details here](MileStone3/README.md)
 
 ---
 
-## 🧠 Reflections and Insights
+## Reflections and Insights
 
 Through these milestones, we experienced the evolution of deep learning practices:
 
