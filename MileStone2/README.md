@@ -1,7 +1,7 @@
 # Milestone 2 - Multi-Class Classification of Sign Language Digits using PyTorch
 
-- **Run the notebook** – [Open in Google Colab](https://colab.research.google.com/drive/1hpOeV_P6bLdP1T_GeFUPohMhuF9ZIEee)  
-- **View the full report** – [MS2_Report.pdf](./MS2_Report.pdf)
+- **Run the notebook** - [Open in Google Colab](https://colab.research.google.com/drive/1hpOeV_P6bLdP1T_GeFUPohMhuF9ZIEee)  
+- **View the full report** - [MS2_Report.pdf](./MS2_Report.pdf)
 
 ---
 
@@ -27,13 +27,15 @@ The dataset was normalized, flattened, and loaded using **custom PyTorch Dataset
 The main goals were:
 
 1. Re-implement the binary classifier using **PyTorch** (transition from NumPy).
-2. Extend the model to handle **multiclass classification** across digits 0–9.
+2. Extend the model to handle **multiclass classification** across digits 0-9.
 
 This included experimenting with deeper networks, dropout layers, learning rate scheduling, early stopping, GPU acceleration, and multiple optimizers.
 
 ---
 
 ## Model Architectures
+
+Below is a summary of the neural network architectures used in both binary and multiclass tasks. We gradually increased network depth and output complexity to support multiclass classification:
 
 | Model Type        | Input Layer | Hidden Layers     | Output Layer | Activation (Hidden) | Activation (Output) | Loss Function             |
 |:-----------------:|:-----------:|:-----------------:|:------------:|:-------------------:|:--------------------:|:--------------------------:|
@@ -43,6 +45,8 @@ This included experimenting with deeper networks, dropout layers, learning rate 
 ---
 
 ## Training Details
+
+To evaluate the models, we experimented with optimizers, learning rates, and batch sizes. Additionally, we incorporated early stopping and dropout to avoid overfitting, especially in the deeper multiclass setup:
 
 | Optimizer    | Learning Rates  | Batch Sizes     | Epochs    | Techniques                               |
 |:------------:|:---------------:|:---------------:|:--------:|:----------------------------------------:|
@@ -64,7 +68,6 @@ In addition to training and validation, **Experiment 2** was further evaluated o
 The model successfully classified **all 10 samples correctly**, yielding a **100% test accuracy**.  
 This demonstrates strong generalization beyond the validation set and confirms the effectiveness of the final architecture and hyperparameters.
 
-
 ---
 
 ## Conclusions
@@ -75,5 +78,3 @@ This milestone showcased the **power and flexibility of PyTorch** for rapid expe
 - PyTorch’s built-in tools like `autograd`, `nn.Module`, `DataLoader`, and GPU support significantly streamlined development.
 
 The final model generalized well and achieved **perfect test performance** on unseen examples — proving the effectiveness of careful tuning, early stopping, and learning rate scheduling.
-
----
