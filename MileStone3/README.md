@@ -16,7 +16,7 @@ Each configuration was explored through three experiments, allowing us to evalua
 
 ---
 
-## Configuration 1 – Transfer Learning
+## Configuration 1 - Transfer Learning
 
 We fine-tuned a ResNet-50 model pre-trained on ImageNet to classify the 196 car categories. This configuration tested the power of transfer learning in adapting general-purpose features to a fine-grained classification task.
 
@@ -30,11 +30,11 @@ We fine-tuned a ResNet-50 model pre-trained on ImageNet to classify the 196 car 
 
 ### Experiments
 
-- **Experiment 1 – Frozen Backbone (No Augmentation)** - A simple classifier was trained on top of a frozen ResNet-50. No data augmentation or regularization was used.
+- **Experiment 1 - Frozen Backbone (No Augmentation)** - A simple classifier was trained on top of a frozen ResNet-50. No data augmentation or regularization was used.
 
-- **Experiment 2 – Frozen Backbone + Augmentation** - Same backbone, with data augmentations (RandomCrop, HorizontalFlip, Rotation). The classifier remained the only trainable part.
+- **Experiment 2 - Frozen Backbone + Augmentation** - Same backbone, with data augmentations (RandomCrop, HorizontalFlip, Rotation). The classifier remained the only trainable part.
 
-- **Experiment 3 – Fine-Tuned Backbone + Augmentation + Dropout** - All layers were unfrozen. Dropout (p=0.5) and the same augmentations were applied.
+- **Experiment 3 - Fine-Tuned Backbone + Augmentation + Dropout** - All layers were unfrozen. Dropout (p=0.5) and the same augmentations were applied.
 
 ---
 
@@ -48,7 +48,7 @@ We fine-tuned a ResNet-50 model pre-trained on ImageNet to classify the 196 car 
 
 ---
 
-### Conclusions – Transfer Learning
+### Conclusions - Transfer Learning
 
 This configuration clearly demonstrated the benefit of progressive improvement:  
 - Using a frozen backbone alone was not sufficient.  
@@ -59,7 +59,7 @@ The best model in this configuration was **Experiment 3**, which achieved the hi
 
 ---
 
-## Configuration 2 – Image Retrieval Using Deep Embeddings
+## Configuration 2 - Image Retrieval Using Deep Embeddings
 
 This configuration focused on visual similarity retrieval instead of direct classification. We trained CNN backbones (ResNet-50, DenseNet121) to generate deep embeddings, then used K-Nearest Neighbors (KNN) over these features to find the most visually similar images. The setup is useful for search engines, recommendation systems, and tasks requiring semantic similarity.
 
@@ -73,11 +73,11 @@ This configuration focused on visual similarity retrieval instead of direct clas
 
 ### Experiments
 
-- **Experiment 1 – ResNet-50 + KNN (k = 3, Euclidean)** - Embeddings were extracted from a fine-tuned ResNet-50 and used with KNN (k = 3, Euclidean).
+- **Experiment 1 - ResNet-50 + KNN (k = 3, Euclidean)** - Embeddings were extracted from a fine-tuned ResNet-50 and used with KNN (k = 3, Euclidean).
 
-- **Experiment 2 – ResNet-50 + KNN (k = 10, Euclidean)** - Same ResNet-50 embeddings, but KNN was configured with a larger neighborhood (k = 10) to improve robustness.
+- **Experiment 2 - ResNet-50 + KNN (k = 10, Euclidean)** - Same ResNet-50 embeddings, but KNN was configured with a larger neighborhood (k = 10) to improve robustness.
 
-- **Experiment 3 – DenseNet121 + KNN (k = 7, Cosine Similarity)** - Switched to DenseNet121 as backbone, with embeddings of size 1024 and cosine similarity instead of Euclidean distance.
+- **Experiment 3 - DenseNet121 + KNN (k = 7, Cosine Similarity)** - Switched to DenseNet121 as backbone, with embeddings of size 1024 and cosine similarity instead of Euclidean distance.
 
 ---
 
@@ -91,7 +91,7 @@ This configuration focused on visual similarity retrieval instead of direct clas
 
 ---
 
-### Conclusions – Image Retrieval
+### Conclusions - Image Retrieval
 
 This configuration highlighted the potential of deep feature embeddings for image-to-image search:
 - Even small neighborhoods (k = 3) yielded good results, but increasing k improved stability.
@@ -102,7 +102,7 @@ The best model in this configuration was **Experiment 2**, which used ResNet-50 
 
 ---
 
-## Configuration 3 – End-to-End Convolutional Neural Network
+## Configuration 3 - End-to-End Convolutional Neural Network
 
 In this configuration, we built and trained a CNN model entirely from scratch, with no pre-trained weights. This allowed full control over the architecture and learning process. The goal was to evaluate the viability of training a custom network on a complex fine-grained dataset like Stanford Cars.
 
@@ -116,11 +116,11 @@ In this configuration, we built and trained a CNN model entirely from scratch, w
 
 ### Experiments
 
-- **Experiment 1 – Basic CNN (No Regularization)** - A minimal CNN with 3 convolutional blocks, no normalization, and no data augmentation.
+- **Experiment 1 - Basic CNN (No Regularization)** - A minimal CNN with 3 convolutional blocks, no normalization, and no data augmentation.
 
-- **Experiment 2 – CNN + BatchNorm + Dropout** - Expanded to 4 convolutional blocks, added Batch Normalization and Dropout, still without augmentation.
+- **Experiment 2 - CNN + BatchNorm + Dropout** - Expanded to 4 convolutional blocks, added Batch Normalization and Dropout, still without augmentation.
 
-- **Experiment 3 – Advanced CNN + Data Augmentation** - Same as Experiment 2, with added RandomCrop, HorizontalFlip, and ColorJitter augmentations. Trained for 40 epochs.
+- **Experiment 3 - Advanced CNN + Data Augmentation** - Same as Experiment 2, with added RandomCrop, HorizontalFlip, and ColorJitter augmentations. Trained for 40 epochs.
 
 ---
 
@@ -160,4 +160,4 @@ In summary, each configuration serves different practical needs:
 - Use **Image Retrieval** for interactive tools or similarity-based search.
 - Use **End-to-End CNN** when full customization or architectural research is needed.
 
-This project deepened our understanding of deep learning design, training stability, and performance evaluation under different constraints — from off-the-shelf reuse to scratch-built solutions.
+This project deepened our understanding of deep learning design, training stability, and performance evaluation under different constraints - from off-the-shelf reuse to scratch-built solutions.
