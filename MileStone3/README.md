@@ -191,27 +191,25 @@ The best retrieval performance was achieved with **ResNet-50 + KNN (k = 10)**, w
 ## Configuration 3 – End-to-End Convolutional Neural Network
 
 ### Overview
-In this configuration, we built and trained a complete CNN model **from scratch**, without relying on pre-trained weights. Unlike the Transfer Learning or Retrieval configurations, this approach gave us full architectural control — and the full burden of learning features directly from the dataset. This allowed us to investigate how depth, normalization, and data augmentation affect generalization in fine-grained settings.
+In this configuration, we built and trained a complete CNN model from scratch, without relying on any pre-trained weights. Unlike the Transfer Learning or Retrieval configurations, this approach gave us full architectural control — and the full burden of learning features directly from the dataset.  
+The Stanford Cars dataset was used as before, and the challenge was to teach a custom model to generalize across 196 classes with subtle differences. This configuration allowed us to investigate how architectural depth, normalization, and data augmentation affect generalization in fine-grained settings.
 
 ### Shared Setup
-- Dataset: Stanford Cars (cropped, 16,185 images, 196 categories)
-- Input Size: 224×224
-- Optimizer: Adam (lr = 0.001)
-- Loss: CrossEntropyLoss
-- Batch Size: 64
-- Pooling: MaxPooling
-- Activation: ReLU
-- Weight Init: He Initialization
-- Training Epochs: up to 40
+
+| Input Size | Optimizer | Learning Rate | Loss Function    | Batch Size | Pooling   | Activation | Weight Init        | Max Epochs |
+|:----------:|:---------:|:-------------:|:----------------:|:----------:|:---------:|:----------:|:------------------:|:----------:|
+| 224×224    | Adam      | 0.001         | CrossEntropyLoss | 64         | MaxPooling | ReLU       | He Initialization  | 40         |
 
 ---
 
 ### Experiment 1 – Basic CNN (No Regularization)
-**Goal:** Build a minimal CNN and test its baseline ability to classify cars  
-**Architecture:**
-- 3 Convolutional Blocks
-- MaxPooling + ReLU
-- Fully Connected Head (no dropout, no normalization)
+**Goal:**  
+Build a minimal CNN and test its baseline ability to classify cars.
+
+**Architecture:**  
+- 3 Convolutional Blocks  
+- MaxPooling + ReLU  
+- Fully Connected Head (no dropout, no normalization)  
 - No data augmentation
 
 **Results:**  
@@ -225,12 +223,14 @@ This model failed to learn meaningful patterns. The lack of depth and regulariza
 ---
 
 ### Experiment 2 – Modified CNN + BatchNorm + Dropout
-**Goal:** Add regularization to improve generalization  
-**Architecture:**
+**Goal:**  
+Add regularization to improve generalization.
+
+**Architecture:**  
 - 4 Convolutional Blocks  
 - BatchNorm after each convolution  
-- Dropout (p=0.5) before final layer  
-- No augmentation  
+- Dropout (p=0.5) before the final layer  
+- No data augmentation
 
 **Results:**  
 - Accuracy: 8.16%  
@@ -243,11 +243,13 @@ Despite deeper architecture and added regularization, performance barely improve
 ---
 
 ### Experiment 3 – Advanced CNN + Data Augmentation
-**Goal:** Combine regularization and augmentation for maximum performance  
-**Architecture:**
+**Goal:**  
+Combine regularization and augmentation for maximum performance.
+
+**Architecture:**  
 - Same as Experiment 2  
 - Augmentations: RandomCrop, HorizontalFlip, ColorJitter  
-- Trained for 40 epochs  
+- Trained for 40 epochs
 
 **Results:**  
 - Accuracy: 72.26%  
@@ -256,33 +258,34 @@ Despite deeper architecture and added regularization, performance barely improve
 - Loss: 1.1026  
 
 **Conclusion:**  
-This configuration **dramatically improved performance**. By combining architectural depth, normalization, dropout, and rich augmentation, the model learned generalizable patterns and became competitive with fine-tuned ResNet-50. This validated the viability of training from scratch with a strong data pipeline.
+This configuration dramatically improved performance. By combining architectural depth, normalization, dropout, and rich augmentation, the model learned generalizable patterns and became competitive with fine-tuned ResNet-50. This validated the viability of training from scratch with a strong data pipeline.
 
 ---
 
 ### End-to-End CNN Summary
 
-| Experiment | Model Description                | Accuracy | F1 Score | Precision | Loss    |
-|------------|----------------------------------|----------|----------|-----------|---------|
-| Exp. 1     | Basic CNN (3 blocks, no reg)     | 8.88%    | 8.52%    | 9.80%     | 4.6955  |
-| Exp. 2     | CNN + BatchNorm + Dropout        | 8.16%    | 6.23%    | 7.17%     | 4.5436  |
-| Exp. 3     | CNN + Augmentation + Regularized | 72.26%   | 72.17%   | 72.99%    | 1.1026  |
-
-> Best model: **Experiment 3 – Advanced CNN with Augmentation**
+| Experiment |            Model Description             | Accuracy | F1 Score | Precision |   Loss   |
+|:----------:|:----------------------------------------:|:--------:|:--------:|:---------:|:--------:|
+|   Exp. 1   | Basic CNN (3 blocks, no regularization)  |  8.88%   |  8.52%   |   9.80%   |  4.6955  |
+|   Exp. 2   | CNN + BatchNorm + Dropout                |  8.16%   |  6.23%   |   7.17%   |  4.5436  |
+|   Exp. 3   | CNN + Augmentation + Regularization      |  72.26%  |  72.17%  |  72.99%   |  1.1026  |
 
 ---
 
 ## Final Comparison: All Configurations
 
-| Configuration     | Best Model                     | Accuracy | F1 Score | Precision | Recall | Comment                           |
-|-------------------|--------------------------------|----------|----------|-----------|--------|------------------------------------|
-| Transfer Learning | ResNet-50 Fine-Tuned + Dropout | 73.78%   | 73.63%   | 78.18%    | 73.78% | Highest overall performance        |
-| Image Retrieval   | ResNet-50 + KNN (k=10)         | 76.77%   | 76.77%   | 78.81%    | 76.77% | Best for similarity search         |
-| End-to-End CNN    | CNN + Aug + Dropout            | 72.26%   | 72.17%   | 72.99%    | 72.26% | Strong results, fully custom model |
+| Configuration     |           Best Model           | Accuracy | F1 Score | Precision | Recall |              Comment              |
+|:-----------------:|:------------------------------:|:--------:|:--------:|:---------:|:------:|:---------------------------------:|
+| Transfer Learning | ResNet-50 Fine-Tuned + Dropout |  73.78%  |  73.63%  |  78.18%   | 73.78% | Highest overall classification    |
+| Image Retrieval   | ResNet-50 + KNN (k=10)         |  76.77%  |  76.77%  |  78.81%   | 76.77% | Best for similarity-based search  |
+| End-to-End CNN    | CNN + Augmentation + Dropout   |  72.26%  |  72.17%  |  72.99%   | 72.26% | Custom design with competitive result |
+
+---
 
 ### Conclusion
 - **Transfer Learning** provided the best classification performance with minimal effort and strong generalization, making it ideal for deployment.
-- **Image Retrieval** was most suitable for search and recommendation systems. The use of learned embeddings allowed flexible querying and robust top-k accuracy.
-- **End-to-End CNN** showed that training from scratch is possible and effective — but requires strong architecture and augmentation strategies.
+- **Image Retrieval** was the most suitable for search and recommendation systems. The use of learned embeddings allowed flexible querying and robust top-k accuracy.
+- **End-to-End CNN** proved that training from scratch is viable and effective — especially with careful regularization and augmentation.
 
-Each configuration contributed unique insights and demonstrated key principles of deep learning: reusability (Transfer Learning), representational power (Embeddings), and architectural design (CNNs from scratch). This project deepened our understanding of modeling strategies, evaluation, and the art of experimentation in real-world machine learning tasks.
+Each configuration contributed unique insights and demonstrated key principles of deep learning: reusability (Transfer Learning), representational power (Embeddings), and architectural design (custom CNNs).  
+This project deepened our understanding of modeling strategies, evaluation metrics, and the experimentation process in real-world machine learning.
