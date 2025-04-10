@@ -1,24 +1,27 @@
 # Milestone 3 - Final Project: Fine-Grained Car Classification and Retrieval
 
-
 ## Introduction
 
 In this final milestone of the "Basics of Deep Learning" course, we tackled the complex task of fine-grained image classification and retrieval using the Stanford Cars Dataset. This dataset includes 16,185 images labeled into 196 subtle car categories, with visual distinctions often limited to minor differences in shape, color, or model details.
 
 To address this challenge, we implemented three distinct deep learning configurations:
-1. Transfer Learning with a pre-trained ResNet-50  
-2. Image Retrieval using feature embeddings and nearest neighbors  
-3. End-to-End Convolutional Neural Network trained from scratch  
 
-Each configuration was explored through three experiments (9 in total), which allowed us to analyze how architecture depth, regularization, fine-tuning, and augmentation strategies affect model performance.
+1. **Transfer Learning with a pre-trained ResNet-50**  
+   _[Link to Notebook – Transfer Learning](https://colab.research.google.com/drive/1pQqWT0t_fVY0rUHVP46eDusuXtT_uqXP)_
 
-All models were implemented in PyTorch, and each configuration was tested with both classification and retrieval-focused metrics where applicable.
+2. **Image Retrieval using feature embeddings and nearest neighbors**  
+   _[Link to Notebook – Image Retrieval](https://colab.research.google.com/drive/1udo_D-PzcosCcCV9K5XtqfF2SUViLc8_)_
+
+3. **End-to-End Convolutional Neural Network trained from scratch**  
+   _[Link to Notebook – End-to-End CNN](https://colab.research.google.com/drive/1kSFLQNswStkj4WQiSAg7eEbKwJ1kSzV3)_
+
+Each configuration was explored through three experiments, allowing us to evaluate the impact of architectural depth, regularization, and data augmentation strategies. All implementations were done in PyTorch, with classification and retrieval tasks evaluated using standard metrics.
 
 ---
 
 ## Configuration 1 – Transfer Learning
 
-In this configuration, we fine-tuned a ResNet-50 model pre-trained on ImageNet to classify the 196 car categories in our dataset. This approach aimed to leverage generalized visual features already learned by the model and adapt them to our fine-grained domain.
+We fine-tuned a ResNet-50 model pre-trained on ImageNet to classify the 196 car categories. This configuration tested the power of transfer learning in adapting general-purpose features to a fine-grained classification task.
 
 ### Shared Settings
 
@@ -28,56 +31,39 @@ In this configuration, we fine-tuned a ResNet-50 model pre-trained on ImageNet t
 
 ---
 
-### Experiment 1 – Base Model (Frozen Backbone)
-**Goal:**  
-Evaluate out-of-the-box generalization of ImageNet features.
+### Experiment 1 – Frozen Backbone (No Augmentation)
 
-**Setup:**  
-Freeze the entire ResNet-50 backbone. Train only the final classification head (2048 → 196). No data augmentation or regularization.
+A simple classifier was trained on top of a frozen ResNet-50. No data augmentation or regularization was used.
 
 **Results:**  
 - Accuracy: 42.37%  
 - F1 Score: 41.96%  
-- Loss: 2.3724  
-
-**Conclusion:**  
-The model struggled to generalize, showing that the final classifier alone can't compensate for domain differences. The features learned on ImageNet are insufficient for fine-grained car classification without adaptation.
+- Loss: 2.3724
 
 ---
 
-### Experiment 2 – Frozen Backbone + Data Augmentation
-**Goal:**  
-Explore how basic data augmentation affects performance.
+### Experiment 2 – Frozen Backbone + Augmentation
 
-**Setup:**  
-Same frozen backbone. Applied RandomCrop, HorizontalFlip, and Rotation (±15°). The classifier remains the only trainable layer.
+Same backbone, with data augmentations (RandomCrop, HorizontalFlip, Rotation). The classifier remained the only trainable part.
 
 **Results:**  
-- Moderate improvement in validation accuracy and stability  
-- Lower loss and a slight boost in precision and recall
-
-**Conclusion:**  
-Even with a fixed backbone, data augmentation enriches the training signal and improves generalization. However, the model’s ceiling is limited without access to deeper layers.
+- Accuracy: ~47%  
+- F1 Score: ~47%  
+- Precision: ~50%  
+- Loss: ~2.000
 
 ---
 
 ### Experiment 3 – Fine-Tuned Backbone + Augmentation + Dropout
-**Goal:**  
-Unlock the full potential of the backbone with regularization.
 
-**Setup:**  
-Unfreeze all ResNet-50 layers. Add Dropout (p = 0.5) before the final layer. Use the same augmentations as in Experiment 2.
+All layers were unfrozen. Dropout (p=0.5) and the same augmentations were applied.
 
 **Results:**  
 - Accuracy: 73.78%  
 - F1 Score: 73.63%  
-- Loss: 0.9012  
 - Precision: 78.18%  
-- Recall: 73.78%
-
-**Conclusion:**  
-This experiment significantly outperformed the others. Unfreezing the backbone allowed domain-specific features to be learned, while dropout and augmentation reduced overfitting.  
-This model was selected as the best classifier in this configuration.
+- Recall: 73.78%  
+- Loss: 0.9012
 
 ---
 
@@ -89,16 +75,22 @@ This model was selected as the best classifier in this configuration.
 |   Exp. 2   | Frozen + Augmentation                         |  ~2.000  |  ~47.0%  |  ~47.0%  |   ~50%    |  ~47%  |
 |   Exp. 3   | Fine-tuned + Dropout + Augmentation           |  0.9012  |  73.78%  |  73.63%  |  78.18%   | 73.78% |
 
+---
+
+### Conclusions – Transfer Learning
+
+This configuration clearly demonstrated the benefit of progressive improvement:  
+- Using a frozen backbone alone was not sufficient.
+- Adding augmentation improved generalization slightly.
+- Fine-tuning the entire network combined with dropout and augmentation resulted in a significant performance boost.
+
+The best model in this configuration was **Experiment 3**, which achieved the highest accuracy and F1 score. This model was later selected as the final classification model for deployment.
 
 ---
 
-
 ## Configuration 2 – Image Retrieval Using Deep Embeddings
 
-### Overview
-In this configuration, we shifted from direct classification to visual similarity retrieval. Instead of predicting class labels, the goal was to embed each image into a feature space and retrieve the most visually similar images using K-Nearest Neighbors (KNN). We relied on deep CNN backbones such as ResNet-50 and DenseNet121 to extract embeddings, then compared vectors using distance metrics (Euclidean or Cosine).  
-This setup is useful for real-world applications like recommendation engines or visual search.  
-The Stanford Cars dataset was used as in previous configurations, and retrieval was performed using KNN over the learned feature embeddings.
+This configuration focused on visual similarity retrieval instead of direct classification. We trained CNN backbones (ResNet-50, DenseNet121) to generate deep embeddings, then used K-Nearest Neighbors (KNN) over these features to find the most visually similar images. The setup is useful for search engines, recommendation systems, and tasks requiring semantic similarity.
 
 ### Shared Settings
 
@@ -106,69 +98,44 @@ The Stanford Cars dataset was used as in previous configurations, and retrieval 
 |:----------:|:------------------------:|:---------:|:-------------:|:----------------:|:----------:|:------:|
 | 224×224    | ResNet-50 / DenseNet121 | Adam      | 0.001         | CrossEntropyLoss | 64         | 10     |
 
-
 ---
 
 ### Experiment 1 – ResNet-50 + KNN (k = 3, Euclidean)
 
-**Goal:**  
-Evaluate embedding quality with a basic KNN setup.
-
-**Setup:**  
-Fine-tuned ResNet-50 (same as classification config), embedding size: 2048, KNN with k = 3 using Euclidean distance.
+Embeddings were extracted from a fine-tuned ResNet-50 and used with KNN (k = 3, Euclidean).
 
 **Results:**  
 - Accuracy: 74.93%  
 - F1 Score: 75.23%  
 - Precision: 77.38%  
 - Recall: 74.93%  
-- Fit Time: 0.0092s  
 - Predict Time: 1.1998s
-
-**Conclusion:**  
-This baseline setup achieved decent retrieval quality. A small k resulted in local consistency but sometimes lacked diversity for ambiguous samples.
 
 ---
 
 ### Experiment 2 – ResNet-50 + KNN (k = 10, Euclidean)
 
-**Goal:**  
-Improve robustness with a wider neighborhood.
-
-**Setup:**  
-Same embedding extractor (ResNet-50), KNN with k = 10 using Euclidean distance.
+Same ResNet-50 embeddings, but KNN was configured with a larger neighborhood (k = 10) to improve robustness.
 
 **Results:**  
 - Accuracy: 76.77%  
 - F1 Score: 76.77%  
 - Precision: 78.81%  
 - Recall: 76.77%  
-- Fit Time: 0.0079s  
 - Predict Time: 1.3873s
-
-**Conclusion:**  
-Increasing k improved robustness and overall accuracy. Larger neighborhoods compensated for class overlaps, and this model achieved the best retrieval performance in this configuration.
 
 ---
 
 ### Experiment 3 – DenseNet121 + KNN (k = 7, Cosine Similarity)
 
-**Goal:**  
-Evaluate alternative backbone and distance metric.
-
-**Setup:**  
-Progressive unfreezing of DenseNet121, embedding size: 1024, KNN with k = 7 using Cosine similarity.
+Switched to DenseNet121 as backbone, with embeddings of size 1024 and cosine similarity instead of Euclidean distance.
 
 **Results:**  
 - Accuracy: 73.41%  
 - F1 Score: 73.49%  
 - Precision: 75.33%  
 - Recall: 73.41%  
-- Fit Time: 0.0047s  
 - Predict Time: 1.0178s
-
-**Conclusion:**  
-Although slightly weaker in accuracy, this model offered fast inference and stable retrieval quality. Cosine similarity proved beneficial for normalized embeddings, and DenseNet’s compact design reduced inference overhead.
 
 ---
 
@@ -182,19 +149,22 @@ Although slightly weaker in accuracy, this model offered fast inference and stab
 
 ---
 
-This configuration highlighted the power of learned embeddings for image-to-image retrieval. It also showed how changing distance metrics and model backbones affects both accuracy and latency, offering flexible solutions depending on task requirements.  
-The best retrieval performance was achieved with **ResNet-50 + KNN (k = 10)**, while **DenseNet121 + Cosine** offered the fastest inference.
+### Conclusions – Image Retrieval
 
+This configuration highlighted the potential of deep feature embeddings for image-to-image search:
+- Even small neighborhoods (k = 3) yielded good results, but increasing k improved stability.
+- Using cosine similarity with DenseNet provided competitive performance and the fastest prediction time.
+- The retrieval pipeline is highly flexible, making it well-suited for applications requiring fast, interpretable, and semantic similarity.
+
+The best model in this configuration was **Experiment 2**, which used ResNet-50 with KNN (k = 10, Euclidean) and achieved the highest accuracy and F1 score.
 
 ---
 
 ## Configuration 3 – End-to-End Convolutional Neural Network
 
-### Overview
-In this configuration, we built and trained a complete CNN model from scratch, without relying on any pre-trained weights. Unlike the Transfer Learning or Retrieval configurations, this approach gave us full architectural control — and the full burden of learning features directly from the dataset.  
-The Stanford Cars dataset was used as before, and the challenge was to teach a custom model to generalize across 196 classes with subtle differences. This configuration allowed us to investigate how architectural depth, normalization, and data augmentation affect generalization in fine-grained settings.
+In this configuration, we built and trained a CNN model entirely from scratch, with no pre-trained weights. This allowed full control over the architecture and learning process. The goal was to evaluate the viability of training a custom network on a complex fine-grained dataset like Stanford Cars.
 
-### Shared Setup
+### Shared Settings
 
 | Input Size | Optimizer | Learning Rate | Loss Function    | Batch Size | Pooling   | Activation | Weight Init        | Max Epochs |
 |:----------:|:---------:|:-------------:|:----------------:|:----------:|:---------:|:----------:|:------------------:|:----------:|
@@ -203,62 +173,36 @@ The Stanford Cars dataset was used as before, and the challenge was to teach a c
 ---
 
 ### Experiment 1 – Basic CNN (No Regularization)
-**Goal:**  
-Build a minimal CNN and test its baseline ability to classify cars.
 
-**Architecture:**  
-- 3 Convolutional Blocks  
-- MaxPooling + ReLU  
-- Fully Connected Head (no dropout, no normalization)  
-- No data augmentation
+A minimal CNN with 3 convolutional blocks and no regularization or data augmentation.
 
 **Results:**  
 - Accuracy: 8.88%  
 - F1 Score: 8.52%  
-- Loss: 4.6955  
-
-**Conclusion:**  
-This model failed to learn meaningful patterns. The lack of depth and regularization, along with no augmentation, made it ineffective on a complex dataset like ours.
+- Loss: 4.6955
 
 ---
 
-### Experiment 2 – Modified CNN + BatchNorm + Dropout
-**Goal:**  
-Add regularization to improve generalization.
+### Experiment 2 – CNN + BatchNorm + Dropout
 
-**Architecture:**  
-- 4 Convolutional Blocks  
-- BatchNorm after each convolution  
-- Dropout (p=0.5) before the final layer  
-- No data augmentation
+Expanded to 4 convolutional blocks. Added Batch Normalization and Dropout (p = 0.5), but still no augmentation.
 
 **Results:**  
 - Accuracy: 8.16%  
 - F1 Score: 6.23%  
-- Loss: 4.5436  
-
-**Conclusion:**  
-Despite deeper architecture and added regularization, performance barely improved. This emphasized the importance of data variation and augmentation, especially in low-data-per-class settings.
+- Loss: 4.5436
 
 ---
 
 ### Experiment 3 – Advanced CNN + Data Augmentation
-**Goal:**  
-Combine regularization and augmentation for maximum performance.
 
-**Architecture:**  
-- Same as Experiment 2  
-- Augmentations: RandomCrop, HorizontalFlip, ColorJitter  
-- Trained for 40 epochs
+Same as Experiment 2, with the addition of augmentations (RandomCrop, HorizontalFlip, ColorJitter). Trained for 40 epochs.
 
 **Results:**  
 - Accuracy: 72.26%  
 - F1 Score: 72.17%  
 - Precision: 72.99%  
-- Loss: 1.1026  
-
-**Conclusion:**  
-This configuration dramatically improved performance. By combining architectural depth, normalization, dropout, and rich augmentation, the model learned generalizable patterns and became competitive with fine-tuned ResNet-50. This validated the viability of training from scratch with a strong data pipeline.
+- Loss: 1.1026
 
 ---
 
@@ -272,20 +216,32 @@ This configuration dramatically improved performance. By combining architectural
 
 ---
 
-## Final Comparison: All Configurations
+### Conclusions – End-to-End CNN
 
-| Configuration     |           Best Model           | Accuracy | F1 Score | Precision | Recall |              Comment              |
-|:-----------------:|:------------------------------:|:--------:|:--------:|:---------:|:------:|:---------------------------------:|
-| Transfer Learning | ResNet-50 Fine-Tuned + Dropout |  73.78%  |  73.63%  |  78.18%   | 73.78% | Highest overall classification    |
-| Image Retrieval   | ResNet-50 + KNN (k=10)         |  76.77%  |  76.77%  |  78.81%   | 76.77% | Best for similarity-based search  |
-| End-to-End CNN    | CNN + Augmentation + Dropout   |  72.26%  |  72.17%  |  72.99%   | 72.26% | Custom design with competitive result |
+This configuration showed a steep learning curve but promising results:
+- Basic models without augmentation or normalization failed to generalize.
+- Adding BatchNorm and Dropout without augmentation was not enough.
+- The full combination of regularization, deeper architecture, and data augmentation led to competitive results.
+
+The best model in this configuration was **Experiment 3**, which demonstrated that with the right setup, custom CNNs can achieve results comparable to pre-trained solutions.
 
 ---
 
-### Conclusion
-- **Transfer Learning** provided the best classification performance with minimal effort and strong generalization, making it ideal for deployment.
-- **Image Retrieval** was the most suitable for search and recommendation systems. The use of learned embeddings allowed flexible querying and robust top-k accuracy.
-- **End-to-End CNN** proved that training from scratch is viable and effective — especially with careful regularization and augmentation.
+## Final Conclusions
 
-Each configuration contributed unique insights and demonstrated key principles of deep learning: reusability (Transfer Learning), representational power (Embeddings), and architectural design (custom CNNs).  
-This project deepened our understanding of modeling strategies, evaluation metrics, and the experimentation process in real-world machine learning.
+This milestone provided a comprehensive comparison between three distinct approaches to solving a fine-grained visual classification task.
+
+- **Transfer Learning** offered the best accuracy for classification with the least engineering effort. It leveraged powerful pre-trained features and benefited significantly from fine-tuning and dropout. This approach is ideal for fast deployment and works especially well when annotated data is limited but domain similarity is high.
+
+- **Image Retrieval** proved effective for semantic similarity tasks. It outperformed classification in raw accuracy when evaluated using KNN over learned embeddings. This approach is especially useful for search interfaces and user-facing systems where interpretability of similarity matters.
+
+- **End-to-End CNN** required more careful design and training but ultimately proved that custom networks can perform competitively when equipped with solid regularization and data augmentation. While resource-intensive, it gives full control over the learning process and is valuable for research and experimentation.
+
+In summary, each configuration serves different practical needs:
+- Use **Transfer Learning** for classification pipelines requiring strong accuracy with minimal compute.
+- Use **Image Retrieval** for interactive tools or similarity-based search.
+- Use **End-to-End CNN** when full customization or architectural research is needed.
+
+This project deepened our understanding of deep learning design, training stability, and performance evaluation under different constraints — from off-the-shelf reuse to scratch-built solutions.
+
+
